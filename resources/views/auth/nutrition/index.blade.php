@@ -3,6 +3,21 @@
     Моя программа питания
 @endsection
 @section('content')
+@php
+    $startDate = now();
+    $endDate = now()->addDays(6);
+    $currentDate = $startDate;
+  
+@endphp
+<div class="d-flex justify-content-around">
+@while($currentDate <= $endDate)
+
+<div class="date-button"><span class="date-txt">{{ $currentDate->format('D d M') }}</span></div>
+@php
+$currentDate = $currentDate->addDay();
+@endphp
+@endwhile
+</div>
     <div class="dishes">
         @foreach($dishes as $dish)
             <div class="dish-card" data-bs-toggle="modal" data-bs-target="#modalDish{{$dish->id}}">

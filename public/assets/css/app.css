@@ -287,3 +287,18 @@ color: #000000;
     }
 }
 /* End DISHES */
+.date-button{
+  background: #FFFFFF;
+border: 1px solid rgba(176, 206, 102, 0.4);
+border-radius: 12px;
+padding: 16px;
+}
+.date-txt{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 19px;
+
+color: #B0CE66;
+}
