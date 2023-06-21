@@ -302,3 +302,30 @@ line-height: 19px;
 
 color: #B0CE66;
 }
+.calculate-p{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 21px;
+/* or 150% */
+
+letter-spacing: 0.1px;
+
+color: #AAB2BD;
+}
+.calculate-h{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 21px;
+/* identical to box height, or 117% */
+
+letter-spacing: 0.1px;
+
+color: #000000;
+}
+.calculate-check{
+    border: 1px solid #000!important;
+}

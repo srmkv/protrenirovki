@@ -4,6 +4,7 @@
 @endsection
 @section('content')
 @php
+    
     $startDate = now();
     $endDate = now()->addDays(6);
     $currentDate = $startDate;

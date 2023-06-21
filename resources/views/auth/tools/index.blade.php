@@ -58,17 +58,7 @@
 
     </div>
 </div>
-<div class="modal fade" id="modalbzu" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content p-3">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Калькулятор БЖУ</h5>
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            </div>
+
 @endsection
 
 
