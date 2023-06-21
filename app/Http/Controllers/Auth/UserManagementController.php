@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BzuCalcRequest;
 use App\Models\Approach;
 use App\Models\DayForFood;
 use App\Models\Dish;
@@ -388,4 +389,27 @@ class UserManagementController extends Controller
 
         return redirect()->route('training.day',$id);
     }
+
+    public function bzu_calc(BzuCalcRequest $request){
+        $data = $request->validated();
+
+        $kkal = 10 * $data['weight_now'] + 6.25 * $data['height'] - 5 * $data['age'];
+
+        if($data['gender'] == 'men'){
+            $kkal += 5;
+        }
+        elseif($data['gender'] == 'women'){
+            $kkal -= 161;
+        }
+
+        $kkal = round($kkal * (float)$data['activity'] * (float)$data['goal']);
+
+        $bzu['protein'] = round($kkal * 0.3 / 4);
+        $bzu['fat'] = round($kkal * 0.3 / 9);
+        $bzu['carbohydrate'] = round($kkal * 0.4 / 4);
+
+        return view('auth.tools.bzu', compact('kkal', 'bzu'));
+
+    }
+
 }

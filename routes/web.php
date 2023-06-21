@@ -118,6 +118,8 @@ Route::middleware("auth")->controller(UserManagementController::class)->group(
         Route::get('/user/workouts', 'workouts')->name('workouts');
         Route::get('/user/nutrition', 'nutrition')->name('nutrition');
         Route::get('/user/rates/change/{id}', 'ratesChange')->name('rates.change');
+        Route::post('/user/bzu/calc', 'bzu_calc')->name('bzu.calc');
+
         // routes for food
         Route::get('/user/food', 'food')->name('food');
         Route::post('/user/food/day/store', 'DayForFoodStore')->name('DayForFood.store');
