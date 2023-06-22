@@ -21,7 +21,14 @@
                     <div class="card mb-4" id="tools">
                         <div class="card-body">
                             <h3 class="tools-title"> {{date("d.m.Y", strtotime($day->date))}} г.</h3>
-                            <p class="tools-description">{{$day->kkal}} ККАЛ</p>
+                            <p class="tools-description">
+                                {{ $energy->energy }} ККАЛ
+                            </p>
+                            <p class="tools-description">
+                                {{ $energy->protein }} г. белка
+                                {{ $energy->fat }} г. жиров
+                                {{ $energy->carbohydrate }} г. углеводов
+                            </p>
                         </div>
                     </div>
                 </a>

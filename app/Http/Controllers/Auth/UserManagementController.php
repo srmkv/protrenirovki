@@ -7,6 +7,7 @@ use App\Http\Requests\BzuCalcRequest;
 use App\Models\Approach;
 use App\Models\DayForFood;
 use App\Models\Dish;
+use App\Models\Energy;
 use App\Models\PeriodDay;
 use App\Models\PeriodTraining;
 use App\Models\Statistics;
@@ -252,7 +253,8 @@ class UserManagementController extends Controller
     public function food()
     {
         $days = DayForFood::where('user_id', Auth::user()->id)->OrderBy('date', 'desc')->get();
-        return view('auth.food.index', compact('days'));
+        $energy = Energy::where('user_id', Auth::user()->id)->first();
+        return view('auth.food.index', compact('days', 'energy'));
     }
 
     public function ratesChange($id)
@@ -441,6 +443,14 @@ class UserManagementController extends Controller
         $bzu['protein'] = round($kkal * 0.3 / 4);
         $bzu['fat'] = round($kkal * 0.3 / 9);
         $bzu['carbohydrate'] = round($kkal * 0.4 / 4);
+
+        $energy = Energy::updateOrCreate([
+            'user_id' => Auth::user()->id,],[
+            'energy' => $kkal,
+            'protein' => $bzu['protein'],
+            'fat' => $bzu['fat'],
+            'carbohydrate' => $bzu['carbohydrate']
+            ]);
 
         return view('auth.tools.bzu', compact('kkal', 'bzu'));
 
