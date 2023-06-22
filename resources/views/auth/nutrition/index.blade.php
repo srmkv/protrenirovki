@@ -4,16 +4,22 @@
 @endsection
 @section('content')
 @php
-    
-    $startDate = now();
-    $endDate = now()->addDays(6);
-    $currentDate = $startDate;
-  
+
+        $startDate = now();
+        $endDate = now()->addDays(6);
+        $currentDate = $startDate;
+
 @endphp
 <div class="d-flex justify-content-around">
 @while($currentDate <= $endDate)
 
-<div class="date-button"><span class="date-txt">{{ $currentDate->format('D d M') }}</span></div>
+        <div class="d-flex align-items-center">
+            <a href="{{route('nutrition', ['date' => $currentDate->format('d.m.Y')])}}"
+               class="btn-head {{Request::get('date') == $currentDate->format('d.m.Y') ? 'text-dark' : '' }} mb-0" >
+                {{ $currentDate->format('d.m.Y') }} г.
+            </a>
+        </div>
+
 @php
 $currentDate = $currentDate->addDay();
 @endphp
@@ -69,7 +75,7 @@ $currentDate = $currentDate->addDay();
         @endforeach
     </div>
     <div class="mt-3">
-        {{ $dishes->links() }}
+
     </div>
 
 @endsection

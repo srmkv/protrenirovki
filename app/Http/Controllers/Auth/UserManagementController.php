@@ -243,7 +243,7 @@ class UserManagementController extends Controller
 
     public function nutrition()
     {
-        $dishes = Dish::paginate(30);
+        $dishes = Dish::all()->random(5);
         return view('auth.nutrition.index', compact('dishes'));
     }
 
