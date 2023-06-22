@@ -17,6 +17,7 @@ use App\Models\UserDish;
 use App\Models\UserImage;
 use App\Models\Waist;
 use App\Models\Weight;
+use Hamcrest\DiagnosingMatcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -288,6 +289,39 @@ class UserManagementController extends Controller
 
         return view('auth.food.day', compact('day', 'periods'));
     }
+
+    public function addRandomFood($id){
+        $dish = Dish::all()->random();
+
+        UserDish::create([
+            'period_day_id' => $id,
+            'name' => $dish->name,
+            'energy' => $dish->energy,
+            'gram' => $dish->energy,
+            'protein' => $dish->energy,
+            'fat' => $dish->energy,
+            'photo' => $dish->photo
+            ]);
+
+        return back();
+    }
+
+    public function changeRandomFood($id){
+        $userDish = UserDish::findOrFail($id);
+        $dish = Dish::all()->random();
+
+        $userDish->update([
+                             'name' => $dish->name,
+                             'energy' => $dish->energy,
+                             'gram' => $dish->energy,
+                             'protein' => $dish->energy,
+                             'fat' => $dish->energy,
+                             'photo' => $dish->photo
+                         ]);
+
+        return back();
+    }
+
 
     public function periodDay($id, Request $request){
         request()->validate([

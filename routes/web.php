@@ -126,6 +126,9 @@ Route::middleware("auth")->controller(UserManagementController::class)->group(
         Route::get('/user/food/day/{id}', 'foodDay')->name('food.day');
         Route::post('/user/food/day/{id}/store', 'periodDay')->name('PeriodDay.store');
         Route::post('/user/food/day/{id}/dish/store', 'dishStore')->name('dish.store');
+        Route::get('/user/add/random/food/{id}', 'addRandomFood')->name('add.random.food');
+        Route::get('/user/change/random/food/{id}', 'changeRandomFood')->name('change.random.food');
+
         // routes for training
         Route::get('/user/training', 'training')->name('training');
         Route::post('/user/training/day/store', 'DayTrainingStore')->name('DayTraining.store');

@@ -12,15 +12,36 @@
             @foreach($periods as $period)
                 <div class="card mb-4" id="tools">
                     <div class="card-body">
-                        <h3 class="tools-title">{{$period->name}}</h3>
+                        <h3 class="tools-title">
+                            {{$period->name}}
+                            <a href="{{route('add.random.food', $period->id)}}" class="btn-head">
+                                Добавить
+                            </a>
+                        </h3>
 
-                        <div class="row">
-                            @foreach($period->dishes as $dish)
-                                <div class="col-1">
-                                    <img src="{{asset('photo/'.$dish->photo)}}" height="100" class="imgprogress">
-                                    <p class="text-center">{{$dish->name}}</p>
-                                </div>
-                            @endforeach
+
+
+                        <div class="row mt-4">
+                            <div class="dishes">
+                                @foreach($period->dishes as $dish)
+                                    <div class="dish-card" data-bs-toggle="modal" data-bs-target="#modalDish{{$dish->id}}">
+                                        <a href="{{route('change.random.food', $dish->id)}}" class="btn-head">
+                                            Изменить
+                                        </a>
+
+                                        <div class="image-wrapper mt-4" style="background-image: url('{{ asset($dish->photo) }}')">
+                                        </div>
+
+                                        <div class="name">{{ $dish->name }}</div>
+                                        <div class="energy">100 Г / {{ $dish->energy }} ККАЛ</div>
+
+
+
+                                    </div>
+
+                                @endforeach
+                            </div>
+
                             <div class="col-1">
                                 <div class="dropbox" role="button" onclick="show({{$period->id}})"
                                      data-bs-toggle="modal"
