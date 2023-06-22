@@ -44,7 +44,7 @@ class LoginRegisterController extends Controller
         $request->validate(
             [
                 'email' => 'required|email|max:250|unique:users',
-                'password' => 'required|min:8|confirmed'
+                'password' => 'required|confirmed'
             ]
         );
 
@@ -57,10 +57,19 @@ class LoginRegisterController extends Controller
         );
 
         $credentials = $request->only('email', 'password');
-        Auth::attempt($credentials);
-        $request->session()->regenerate();
-        return redirect()->route('progress')
-            ->withSuccess('You have successfully registered & logged in!');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('progress')
+                ->withSuccess('Успешно!');
+        }
+
+        return back()->withErrors(
+            [
+                'email' => "Неверное имя пользователя или пароль."
+            ]
+        )->onlyInput('email');
+
     }
 
     /**
@@ -91,7 +100,7 @@ class LoginRegisterController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('progress')
-                ->withSuccess('You have successfully logged in!');
+                ->withSuccess('Успешно!');
         }
 
         return back()->withErrors(
@@ -131,8 +140,11 @@ class LoginRegisterController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('home')
-            ->withSuccess('You have logged out successfully!');
+        return redirect()->route('home')->withErrors(
+            [
+                'email' => "Успешно"
+            ]
+        )->onlyInput('email');
     }
 
 }
