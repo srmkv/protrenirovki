@@ -17,7 +17,7 @@
             <p class="btn-head mb-0 text-dark">
                 {{date("d.m.Y", strtotime($date))}} г.
             </p>
-            <a href="" class="btn-head ql-size-large">
+            <a href="{{route('food')}}" class="btn-head ql-size-large">
                 Добавить все
             </a>
         </div>

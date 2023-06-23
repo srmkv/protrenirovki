@@ -6,61 +6,74 @@
 
 
 
-    <div class="row">
+    <div class="row card">
         <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">
 
-            @foreach($periods as $period)
-                <div class="card mb-4" id="tools">
-                    <div class="card-body">
-                        <h3 class="tools-title">
-                            {{$period->name}}
-                            <a href="{{route('add.random.food', $period->id)}}" class="btn-head">
-                                Добавить
-                            </a>
-                        </h3>
+            <p class="tools-description mt-4"> Расчет потребления калорий: {{ $energy->energy }} ККАЛ</p>
 
+            <p class="tools-description">
+                Расчет потребления БЖУ:
+                {{ $energy->protein }} г. белка
+                {{ $energy->fat }} г. жиров
+                {{ $energy->carbohydrate }} г. углеводов
+            </p>
 
+            <p class="tools-description">
+                Вам осталось:
+                {{$differenceEnergy}} ККАЛ
+            </p>
 
-                        <div class="row mt-4">
-                            <div class="dishes">
-                                @foreach($period->dishes as $dish)
-                                    <div class="dish-card" data-bs-toggle="modal" data-bs-target="#modalDish{{$dish->id}}">
-                                        <a href="{{route('change.random.food', $dish->id)}}" class="btn-head">
-                                            Изменить
-                                        </a>
+            <div class="dishes">
+                @foreach($dishes as $dish)
+                    <div class="dish-card">
+                        <div class="image-wrapper" style="background-image: url('{{ asset($dish->photo) }}')">
 
-                                        <div class="image-wrapper mt-4" style="background-image: url('{{ asset($dish->photo) }}')">
-                                        </div>
+                        </div>
+                        <div class="name" data-bs-toggle="modal" data-bs-target="#modalDish{{$dish->id}}">{{ $dish->name }}</div>
+                        <div class="energy mb-4">100 Г / {{ $dish->energy }} ККАЛ</div>
 
-                                        <div class="name">{{ $dish->name }}</div>
-                                        <div class="energy">100 Г / {{ $dish->energy }} ККАЛ</div>
+                    </div>
 
-
-
+                    <div class="modal fade" id="modalDish{{$dish->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content p-3">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">{{ $dish->name }}</h5>
+                                </div>
+                                <p class="mt-3 mb-3">
+                                    {{ $dish->description }}
+                                </p>
+                                <img src="{{ asset($dish->photo) }}" width="100%">
+                                <div class="d-flex justify-content-between mt-3">
+                                    <div>Время приготовления</div>
+                                    <span class="fw-bold">{{ $dish->cooking_time }}</span>
+                                </div>
+                                <div class="line"></div>
+                                <div class="">
+                                    <h4>Ингредиенты</h4>
+                                    <div class="ingredients">
+                                        @foreach($dish->ingredients as $ingredient)
+                                            <div class="d-flex justify-content-between p-2 border-bottom">
+                                                <span>{{ $ingredient->name }} {{$ingredient->pivot->information}}</span>
+                                                <span>{{ $ingredient->pivot->quantity }}</span>
+                                            </div>
+                                        @endforeach
                                     </div>
-
-                                @endforeach
-                            </div>
-
-                            <div class="col-1">
-                                <div class="dropbox" role="button" onclick="show({{$period->id}})"
-                                     data-bs-toggle="modal"
-                                     data-bs-target="#modalDish">
-                                    <data value="{{$period->id}}" id="{{$period->id}}"></data>
+                                </div>
+                                <div class="">
+                                    <h4 class="mb-2 mt-3">Приготовление</h4>
+                                    @foreach($dish->steps as $step)
+                                        <div class="border-bottom p-3">
+                                            <h3>{{ $loop->index + 1 }}.</h3>
+                                            {!! $step !!}
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-                </div>
-            @endforeach
 
-            <div class="card mb-4" id="tools">
-                <div class="card-body">
-                    <div class="dropbox" role="button" data-bs-toggle="modal" data-bs-target="#modalPeriodDay">
-                    </div>
-                </div>
+                @endforeach
             </div>
 
 

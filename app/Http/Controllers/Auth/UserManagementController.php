@@ -275,7 +275,7 @@ class UserManagementController extends Controller
             return view('auth.nutrition.index');
         }
 
-        $date = DayFood::where('user_id', Auth::user()->id)->first();
+        $date = DayFood::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
         $dishes = Dish::join('food_dishes', 'food_dishes.dish_id', '=', 'dishes.id')
             ->where('day_food_id', $date->id)
             ->get();
@@ -287,7 +287,7 @@ class UserManagementController extends Controller
 
     public function food()
     {
-        $days = DayForFood::where('user_id', Auth::user()->id)->OrderBy('date', 'desc')->get();
+        $days = DayFood::where('user_id', Auth::user()->id)->OrderBy('date', 'desc')->get();
         $energy = Energy::where('user_id', Auth::user()->id)->first();
         return view('auth.food.index', compact('days', 'energy'));
     }
@@ -321,10 +321,20 @@ class UserManagementController extends Controller
 
     public function foodDay($id)
     {
-        $day = DayForFood::findOrFail($id);
-        $periods = PeriodDay::where('day_id', $id)->get();
+        $energy = Energy::where('user_id', Auth::user()->id)->first();
+        $day = DayFood::findOrFail($id);
+        $dishes = Dish::join('food_dishes', 'food_dishes.dish_id', '=', 'dishes.id')
+            ->where('day_food_id', $id)
+            ->get();
 
-        return view('auth.food.day', compact('day', 'periods'));
+        $sumEnergy = 0;
+        foreach ($dishes as $dish){
+            $sumEnergy += $dish->energy;
+        }
+
+        $differenceEnergy = $energy->energy - $sumEnergy;
+
+        return view('auth.food.day', compact('day', 'dishes', 'energy', 'differenceEnergy'));
     }
 
     public function addRandomFood($id){
