@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BzuCalcRequest;
+use App\Http\Requests\NutritionRequest;
 use App\Models\Approach;
+use App\Models\DayFood;
 use App\Models\DayForFood;
 use App\Models\Dish;
 use App\Models\Energy;
+use App\Models\FoodDish;
 use App\Models\PeriodDay;
 use App\Models\PeriodTraining;
 use App\Models\Statistics;
@@ -243,10 +246,42 @@ class UserManagementController extends Controller
         return view('auth.workouts.index');
     }
 
-    public function nutrition()
+    public function nutrition(Request $request)
     {
-        $dishes = Dish::all()->random(5);
-        return view('auth.nutrition.index', compact('dishes'));
+        if($request->has('dish_id')){
+            $dish = Dish::all()->random();
+            $foodDish = FoodDish::where('dish_id', $request->dish_id)->first();
+            $foodDish->update(['dish_id' => $dish->id]);
+        }
+        if($request->has('dishCount') and $request->has('date')){
+            $dishCount = $request->dishCount;
+            $date = $request->date;
+            $dayFood = DayFood::create([
+                'user_id' => Auth::user()->id,
+                'date' => $date
+                ]);
+            $dishes = Dish::all()->random($dishCount);
+
+            foreach ($dishes as $dish){
+                FoodDish::create([
+                    'day_food_id' => $dayFood->id,
+                    'dish_id' => $dish->id
+                    ]);
+            }
+
+        }
+
+        if(!$request->has('dishCount') and !$request->has('date') and !$request->has('dish_id')){
+            return view('auth.nutrition.index');
+        }
+
+        $date = DayFood::where('user_id', Auth::user()->id)->first();
+        $dishes = Dish::join('food_dishes', 'food_dishes.dish_id', '=', 'dishes.id')
+            ->where('day_food_id', $date->id)
+            ->get();
+
+        return view('auth.nutrition.index', compact('dishes', 'date'));
+
     }
 
 

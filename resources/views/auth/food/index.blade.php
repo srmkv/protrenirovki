@@ -1,12 +1,6 @@
 @extends('auth.layouts.user_type.auth')
 @section('page')
     Дневник питания
-
-    <div class="d-flex align-items-center">
-        <button class="btn-head mb-0" data-bs-toggle="modal" data-bs-target="#modalDayForFood">
-            <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Добавить день
-        </button>
-    </div>
 @endsection
 @section('content')
 

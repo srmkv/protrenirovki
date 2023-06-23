@@ -1,39 +1,42 @@
 @extends('auth.layouts.user_type.auth')
 @section('page')
     Моя программа питания
+
+    <div class="d-flex align-items-center">
+        <button class="btn-head mb-0" data-bs-toggle="modal" data-bs-target="#modalNutrition">
+            <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Добавить день
+        </button>
+    </div>
+
 @endsection
 @section('content')
-@php
-
-        $startDate = now();
-        $endDate = now()->addDays(6);
-        $currentDate = $startDate;
-
-@endphp
-<div class="d-flex justify-content-around">
-@while($currentDate <= $endDate)
+</div>
+    @isset($dishes)
 
         <div class="d-flex align-items-center">
-            <a href="{{route('nutrition', ['date' => $currentDate->format('d.m.Y')])}}"
-               class="btn-head {{Request::get('date') == $currentDate->format('d.m.Y') ? 'text-dark' : '' }} mb-0" >
-                {{ $currentDate->format('d.m.Y') }} г.
+            <p class="btn-head mb-0 text-dark">
+                {{date("d.m.Y", strtotime($date))}} г.
+            </p>
+            <a href="" class="btn-head ql-size-large">
+                Добавить все
             </a>
         </div>
 
-@php
-$currentDate = $currentDate->addDay();
-@endphp
-@endwhile
-</div>
     <div class="dishes">
         @foreach($dishes as $dish)
-            <div class="dish-card" data-bs-toggle="modal" data-bs-target="#modalDish{{$dish->id}}">
+            <div class="dish-card">
                 <div class="image-wrapper" style="background-image: url('{{ asset($dish->photo) }}')">
 
                 </div>
-                <div class="name">{{ $dish->name }}</div>
-                <div class="energy">100 Г / {{ $dish->energy }} ККАЛ</div>
+                <div class="name" data-bs-toggle="modal" data-bs-target="#modalDish{{$dish->id}}">{{ $dish->name }}</div>
+                <div class="energy mb-4">100 Г / {{ $dish->energy }} ККАЛ</div>
+
+                <a href="{{route('nutrition', ['dish_id' => $dish->dish_id] )}}" class="btn-head">
+                    Изменить
+                </a>
+
             </div>
+
             <div class="modal fade" id="modalDish{{$dish->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content p-3">
@@ -72,10 +75,43 @@ $currentDate = $currentDate->addDay();
                     </div>
                 </div>
             </div>
+
         @endforeach
     </div>
-    <div class="mt-3">
 
+    @endisset
+
+
+    <!-- Modal modalNutrition  -->
+    <div class="modal fade" id="modalNutrition" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Добавить день</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{route('nutrition')}}" method="get">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="ForDate" class="form-label">Дата</label>
+                            <input type="date" name="date" class="form-control" id="ForDate" placeholder="Дата">
+                        </div>
+                        <div class="mb-3">
+                            <label for="FormWeight" class="form-label">Количество приёма пиши</label>
+                            <input type="number" name="dishCount" min="1" max="8" class="form-control" id="FormWeight" placeholder="Количество приёма пиши">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="btn btn-form">Сохранить</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
     </div>
+    <!--modal-->
 
 @endsection
