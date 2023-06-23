@@ -15,7 +15,7 @@
 
         <div class="d-flex align-items-center">
             <p class="btn-head mb-0 text-dark">
-                {{date("d.m.Y", strtotime($date))}} г.
+                {{date("d.m.Y", strtotime($date->date))}} г.
             </p>
             <a href="{{route('food')}}" class="btn-head ql-size-large">
                 Добавить все
