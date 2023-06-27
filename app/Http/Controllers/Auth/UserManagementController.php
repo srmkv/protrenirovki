@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BzuCalcRequest;
 use App\Http\Requests\NutritionRequest;
 use App\Models\Approach;
+use App\Models\BjuParametres;
 use App\Models\DayFood;
 use App\Models\DayForFood;
 use App\Models\Dish;
@@ -227,7 +228,10 @@ class UserManagementController extends Controller
 
     public function tools()
     {
-        return view('auth.tools.index');
+        $bjuParametres = BjuParametres::where('user_id', Auth::user()->id)
+            ->latest()
+            ->first();
+        return view('auth.tools.index', compact('bjuParametres'));
     }
 
     public function consultations()
@@ -275,12 +279,13 @@ class UserManagementController extends Controller
             return view('auth.nutrition.index');
         }
 
+        $energy = Energy::where('user_id', Auth::user()->id)->latest()->first();
         $date = DayFood::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
         $dishes = Dish::join('food_dishes', 'food_dishes.dish_id', '=', 'dishes.id')
             ->where('day_food_id', $date->id)
             ->get();
 
-        return view('auth.nutrition.index', compact('dishes', 'date'));
+        return view('auth.nutrition.index', compact('dishes', 'date', 'energy'));
 
     }
 
@@ -495,6 +500,17 @@ class UserManagementController extends Controller
             'protein' => $bzu['protein'],
             'fat' => $bzu['fat'],
             'carbohydrate' => $bzu['carbohydrate']
+            ]);
+
+        BjuParametres::updateOrCreate([
+            'user_id' => Auth::user()->id,],[
+            'goal' => $data['goal'],
+            'weight_now' => $data['weight_now'],
+            'height' => $data['height'],
+            'age' => $data['age'],
+            'gender' => $data['gender'],
+            'activity' => $data['activity'],
+            'desired_weight' => $data['desired_weight']
             ]);
 
         return view('auth.tools.bzu', compact('kkal', 'bzu'));

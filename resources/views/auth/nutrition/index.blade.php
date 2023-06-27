@@ -2,15 +2,22 @@
 @section('page')
     Моя программа питания
 
+    @isset($energy)
     <div class="d-flex align-items-center">
         <button class="btn-head mb-0" data-bs-toggle="modal" data-bs-target="#modalNutrition">
             <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Добавить день
         </button>
     </div>
 
+    @else
+            <a href="{{route('tools')}}" class="btn btn-info">
+                Чтобы использовать прогамму питания, вам нужно пройти через калкулятор калорий и БЖУ в разделе "Полезные инструменты"
+            </a>
+    @endisset
+
 @endsection
 @section('content')
-</div>
+
     @isset($dishes)
 
         <div class="d-flex align-items-center">
@@ -29,7 +36,7 @@
 
                 </div>
                 <div class="name" data-bs-toggle="modal" data-bs-target="#modalDish{{$dish->id}}">{{ $dish->name }}</div>
-                <div class="energy mb-4">100 Г / {{ $dish->energy }} ККАЛ</div>
+                <div class="energy mb-4">порция / {{ $dish->energy }} ККАЛ</div>
 
                 <a href="{{route('nutrition', ['dish_id' => $dish->dish_id] )}}" class="btn-head">
                     Изменить
