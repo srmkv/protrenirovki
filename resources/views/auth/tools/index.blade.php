@@ -74,61 +74,61 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <select class="form-select" name="goal" aria-label="Default select example">
-                            <option value="0.7" {{$bjuParametres->goal == 0.7 ? 'selected' : ''}} >Снижение веса</option>
-                            <option value="1" {{$bjuParametres->goal == 1 ? 'selected' : ''}}>Поддержание веса</option>
-                            <option value="1.3" {{$bjuParametres->goal == 1.3 ? 'selected' : ''}}>Набор массы</option>
+                            <option value="0.7" @isset($bjuParametres) {{ $bjuParametres->goal== 0.7 ? 'selected' : ''}} @endisset>Снижение веса</option>
+                            <option value="1" @isset($bjuParametres) {{$bjuParametres->goal == 1 ? 'selected' : ''}} @endisset>Поддержание веса</option>
+                            <option value="1.3" @isset($bjuParametres) {{$bjuParametres->goal == 1.3 ? 'selected' : ''}} @endisset>Набор массы</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="FormBZU" class="form-label">Вес сейчас</label>
-                        <input type="number" step="0.1" value="{{$bjuParametres->weight_now}}" name="weight_now" class="form-control" id="#" placeholder="Вес сейчас">
+                        <input type="number" step="0.1" @isset($bjuParametres) value="{{$bjuParametres->weight_now}}" @endisset name="weight_now" class="form-control" id="#" placeholder="Вес сейчас">
                     </div>
                     <div class="mb-3">
                         <label for="FormBZU" class="form-label">Рост</label>
-                        <input type="number" step="0.1" value="{{$bjuParametres->height}}" name="height" class="form-control" id="#" placeholder="Рост">
+                        <input type="number" step="0.1" @isset($bjuParametres) value="{{$bjuParametres->height}}" @endisset name="height" class="form-control" id="#" placeholder="Рост">
                     </div>
                     <div class="mb-3">
                         <label for="FormBZU" class="form-label">Возраст</label>
-                        <input type="number" value="{{$bjuParametres->age}}" name="age" class="form-control" id="#" placeholder="Возраст">
+                        <input type="number" @isset($bjuParametres) value="{{$bjuParametres->age}}" @endisset name="age" class="form-control" id="#" placeholder="Возраст">
                     </div>
                     <div class="mb-3">
                         <select class="form-select" name="gender" aria-label="Default select example">
                             <option selected="">Пол</option>
-                            <option value="men" {{$bjuParametres->gender == "men" ? 'selected' : ''}}>Мужчина</option>
-                            <option value="women" {{$bjuParametres->gender == "women" ? 'selected' : ''}}>Женщина</option>
+                            <option value="men" @isset($bjuParametres) {{$bjuParametres->gender == "men" ? 'selected' : ''}} @endisset>Мужчина</option>
+                            <option value="women" @isset($bjuParametres) {{$bjuParametres->gender == "women" ? 'selected' : ''}} @endisset>Женщина</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <p class="calculate-h">Активность</p>
                     </div>
                     <div class="mb-3">
-                        <input class="form-check-input calculate-check" {{$bjuParametres->activity == 1.2 ? 'checked' : ''}}
+                        <input class="form-check-input calculate-check" @isset($bjuParametres) {{$bjuParametres->activity == 1.2 ? 'checked' : ''}} @endisset
                         name="activity" type="checkbox" value="1.2"  id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">Практически полное отсутствие активности</label>
                         <p class="calculate-p">Сюда относятся люди с сидячим образом жизни, не занимающиеся спортом. .</p>
                     </div>
                     <div class="mb-3">
-                        <input class="form-check-input calculate-check" {{$bjuParametres->activity == 1.375 ? 'checked' : ''}}
+                        <input class="form-check-input calculate-check" @isset($bjuParametres) {{$bjuParametres->activity == 1.375 ? 'checked' : ''}}@endisset
                         name="activity" type="checkbox" value="1.375"  id="flexCheckDefault2">
                         <label class="form-check-label" for="flexCheckDefault2">Слабая активность</label>
                         <p class="calculate-p">Это либо сидячий образ жизни в купе с небольшими тренировками 1-3 раза в неделю,
                             либо занятия, требующие регулярной длительной ходьбы. </p>
                     </div>
                     <div class="mb-3">
-                        <input class="form-check-input calculate-check" {{$bjuParametres->activity == 1.55 ? 'checked' : ''}}
+                        <input class="form-check-input calculate-check" @isset($bjuParametres) {{$bjuParametres->activity == 1.55 ? 'checked' : ''}}@endisset
                         name="activity" type="checkbox" value="1.55"  id="flexCheckDefault3">
                         <label class="form-check-label" for="flexCheckDefault3">Средняя активность</label>
                         <p class="calculate-p">Этот коэффициент выбирают те, кто занимается спортом 3-4 раза в неделю по 30-60 минут. </p>
                     </div>
                     <div class="mb-3">
-                        <input class="form-check-input calculate-check" {{$bjuParametres->activity == 1.7 ? 'checked' : ''}}
+                         <input class="form-check-input calculate-check" @isset($bjuParametres) {{$bjuParametres->activity == 1.7 ? 'checked' : ''}}@endisset
                         name="activity" type="checkbox" value="1.7"  id="flexCheckDefault4">
                         <label class="form-check-label" for="flexCheckDefault4">Высокая активность</label>
                         <p class="calculate-p">Это ежедневные или практически ежедневные тренировки, либо занятость
                             в сфере строительства, сельского хозяйства и т.д. </p>
                     </div>
                     <div class="mb-3">
-                        <input class="form-check-input calculate-check" {{$bjuParametres->activity == 1.9 ? 'checked' : ''}}
+                        <input class="form-check-input calculate-check" @isset($bjuParametres) {{$bjuParametres->activity == 1.9 ? 'checked' : ''}}@endisset
                         name="activity" type="checkbox" value="1.9"  id="flexCheckDefault5">
                         <label class="form-check-label" for="flexCheckDefault5">Экстремальная активность</label>
                         <p class="calculate-p">Сюда относятся спортсмены с ежедневными многоразовыми тренировками и люди
@@ -136,7 +136,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="FormBZU" class="form-label">Желаемый вес</label>
-                        <input type="number" step="0.1" value="{{$bjuParametres->desired_weight}}" name="desired_weight" class="form-control" id="#" placeholder="Желаемый вес">
+                        <input type="number" step="0.1" @isset($bjuParametres) value="{{$bjuParametres->desired_weight}}" @endisset name="desired_weight" class="form-control" id="#" placeholder="Желаемый вес">
                     </div>
                 </div>
                 <div class="modal-footer">
