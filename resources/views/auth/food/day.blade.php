@@ -30,7 +30,7 @@
 
                         </div>
                         <div class="name" data-bs-toggle="modal" data-bs-target="#modalDish{{$dish->id}}">{{ $dish->name }}</div>
-                        <div class="energy mb-4">100 Г / {{ $dish->energy }} ККАЛ</div>
+                        <div class="energy mb-4">1 порция / {{ $dish->energy }} ККАЛ</div>
 
                     </div>
 

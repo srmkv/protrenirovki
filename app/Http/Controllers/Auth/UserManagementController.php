@@ -257,6 +257,22 @@ class UserManagementController extends Controller
             $foodDish = FoodDish::where('dish_id', $request->dish_id)->first();
             $foodDish->update(['dish_id' => $dish->id]);
         }
+
+        if($request->has('add_dish')){
+            $dish = Dish::all()->random();
+            FoodDish::create([
+                'day_food_id' => $request->add_dish,
+                'dish_id' => $dish->id
+                             ]);
+        }
+
+
+
+        if($request->has('del_dish_id')){
+            $foodDish = FoodDish::where('dish_id', $request->del_dish_id)->first();
+            $foodDish->delete();
+        }
+
         if($request->has('dishCount') and $request->has('date')){
             $dishCount = $request->dishCount;
             $date = $request->date;
@@ -275,9 +291,14 @@ class UserManagementController extends Controller
 
         }
 
-        if(!$request->has('dishCount') and !$request->has('date') and !$request->has('dish_id')){
-            return view('auth.nutrition.index');
+        if(!$request->has('dishCount') and !$request->has('date')
+            and !$request->has('dish_id') and !$request->has('del_dish_id')
+            and !$request->has('add_dish')
+        ){
+            $energy = Energy::where('user_id', Auth::user()->id)->latest()->first();
+            return view('auth.nutrition.index', compact('energy'));
         }
+
 
         $energy = Energy::where('user_id', Auth::user()->id)->latest()->first();
         $date = DayFood::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
@@ -285,7 +306,14 @@ class UserManagementController extends Controller
             ->where('day_food_id', $date->id)
             ->get();
 
-        return view('auth.nutrition.index', compact('dishes', 'date', 'energy'));
+        $sumEnergy = 0;
+        foreach ($dishes as $dish){
+            $sumEnergy += $dish->energy;
+        }
+
+        $differenceEnergy = $energy->energy - $sumEnergy;
+
+        return view('auth.nutrition.index', compact('dishes', 'date', 'energy', 'differenceEnergy'));
 
     }
 
