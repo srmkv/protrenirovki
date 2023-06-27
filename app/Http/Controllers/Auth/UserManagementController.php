@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BzuCalcRequest;
 use App\Http\Requests\NutritionRequest;
+use App\Http\Requests\WaterRequest;
 use App\Models\Approach;
 use App\Models\BjuParametres;
 use App\Models\DayFood;
@@ -21,6 +22,8 @@ use App\Models\TrainingDay;
 use App\Models\UserDish;
 use App\Models\UserImage;
 use App\Models\Waist;
+use App\Models\Water;
+use App\Models\WaterParametres;
 use App\Models\Weight;
 use Hamcrest\DiagnosingMatcher;
 use Illuminate\Http\Request;
@@ -231,7 +234,10 @@ class UserManagementController extends Controller
         $bjuParametres = BjuParametres::where('user_id', Auth::user()->id)
             ->latest()
             ->first();
-        return view('auth.tools.index', compact('bjuParametres'));
+        $waterParametres = WaterParametres::where('user_id', Auth::user()->id)
+            ->latest()
+            ->first();
+        return view('auth.tools.index', compact('bjuParametres', 'waterParametres'));
     }
 
     public function consultations()
@@ -536,6 +542,37 @@ class UserManagementController extends Controller
             ]);
 
         return view('auth.tools.bzu', compact('kkal', 'bzu'));
+
+    }
+
+    public function waterCalc(WaterRequest $request){
+        $data = $request->validated();
+        $data['user_id'] = Auth::user()->id;
+        WaterParametres::updateOrCreate([
+            'user_id' => $data['user_id'],],[
+            'height' => $data['height'],
+            'gender' => $data['gender'],
+            'active_time' => $data['active_time']
+            ]);
+
+        $waterml = ($data['height'] - 100) * 0.03;
+
+        if($data['gender'] == 'men'){
+            $water['water_with_train'] = ($waterml + $data['active_time'] * 0.04 ) * 1000;
+        }
+        elseif($data['gender'] == 'women'){
+            $water['water_with_train'] = ($waterml + $data['active_time'] * 0.06 ) * 1000;
+        }
+        $water['water_without_train'] = $waterml * 1000;
+
+        Water::updateOrCreate([
+            'user_id' => $data['user_id'],],[
+            'water_with_train' => $water['water_with_train'],
+            'water_without_train' => $water['water_without_train']
+            ]);
+
+        return view('auth.tools.water', compact('water'));
+
 
     }
 

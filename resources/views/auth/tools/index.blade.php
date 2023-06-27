@@ -35,7 +35,7 @@
       </div>
 
       <div class="card mb-4" id="tools">
-        <div class="card-body">
+        <div class="card-body" data-bs-toggle="modal" data-bs-target="#modalWater">
             <h5 class="tools-title">Расчет потребления воды</h5>
             <p class="tools-description">Сколько воды нужно пить в день</p>
         </div>
@@ -137,6 +137,44 @@
                     <div class="mb-3">
                         <label for="FormBZU" class="form-label">Желаемый вес</label>
                         <input type="number" step="0.1" @isset($bjuParametres) value="{{$bjuParametres->desired_weight}}" @endisset name="desired_weight" class="form-control" id="#" placeholder="Желаемый вес">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-form">Сохранить</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--modal-->
+
+<!-- Modal modalWater  -->
+<div class="modal fade" id="modalWater" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Калькулятор расчета нормы потребления воды</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{route('water.calc')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="FormBZU" class="form-label">Рост</label>
+                        <input type="number" step="0.1" @isset($waterParametres) value="{{$waterParametres->height}}" @endisset name="height" class="form-control" id="#" placeholder="Рост">
+                    </div>
+                    <div class="mb-3">
+                        <label for="FormBZU" class="form-label">Время активности (в часах) </label>
+                        <input type="number" step="0.25" @isset($waterParametres) value="{{$waterParametres->active_time}}" @endisset name="active_time" class="form-control" id="#" placeholder="(в часах)">
+                    </div>
+                    <div class="mb-3">
+                        <label for="FormBZU" class="form-label">Пол </label>
+                        <select class="form-select" name="gender" aria-label="Default select example">
+                            <option value="men" @isset($waterParametres) {{$waterParametres->gender == "men" ? 'selected' : ''}} @endisset>Мужчина</option>
+                            <option value="women" @isset($waterParametres) {{$waterParametres->gender == "women" ? 'selected' : ''}} @endisset>Женщина</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">

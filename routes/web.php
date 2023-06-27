@@ -120,6 +120,7 @@ Route::middleware("auth")->controller(UserManagementController::class)->group(
         Route::get('/user/nutrition', 'nutrition')->name('nutrition');
         Route::get('/user/rates/change/{id}', 'ratesChange')->name('rates.change');
         Route::post('/user/bzu/calc', 'bzu_calc')->name('bzu.calc');
+        Route::post('/user/water/calc', 'waterCalc')->name('water.calc');
 
         // routes for food
         Route::get('/user/food', 'food')->name('food');
