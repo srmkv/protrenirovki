@@ -370,37 +370,31 @@ class UserManagementController extends Controller
         return view('auth.food.day', compact('day', 'dishes', 'energy', 'differenceEnergy'));
     }
 
-    public function addRandomFood($id){
+    public function addRandomFood($date_id){
         $dish = Dish::all()->random();
 
-        UserDish::create([
-            'period_day_id' => $id,
-            'name' => $dish->name,
-            'energy' => $dish->energy,
-            'gram' => $dish->energy,
-            'protein' => $dish->energy,
-            'fat' => $dish->energy,
-            'photo' => $dish->photo
-            ]);
+        FoodDish::create([
+            'day_food_id' => $date_id,
+            'dish_id' => $dish->id
+            ]);;
 
         return back();
     }
 
-    public function changeRandomFood($id){
-        $userDish = UserDish::findOrFail($id);
-        $dish = Dish::all()->random();
-
-        $userDish->update([
-                             'name' => $dish->name,
-                             'energy' => $dish->energy,
-                             'gram' => $dish->energy,
-                             'protein' => $dish->energy,
-                             'fat' => $dish->energy,
-                             'photo' => $dish->photo
-                         ]);
-
+    public function changeRandomFood($date_id, $dish_id){
+        $userDish = FoodDish::where('dish_id', $dish_id)->where('day_food_id', $date_id )->first();
+        $dish = Dish::all()->random(1);
+        $userDish->dish_id = $dish[0]->id;
+        $userDish->save();
         return back();
     }
+
+    public function deleteFood($date_id, $dish_id){
+        $userDish = FoodDish::where('dish_id', $dish_id)->where('day_food_id', $date_id )->first();
+        $userDish->delete();
+        return back();
+    }
+
 
 
     public function periodDay($id, Request $request){

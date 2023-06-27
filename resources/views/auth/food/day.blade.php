@@ -32,6 +32,14 @@
                         <div class="name" data-bs-toggle="modal" data-bs-target="#modalDish{{$dish->id}}">{{ $dish->name }}</div>
                         <div class="energy mb-4">1 порция / {{ $dish->energy }} ККАЛ</div>
 
+                        <a href="{{route('change.random.food', ['date_id' => $day->id, 'dish_id' => $dish->dish_id] )}}" class="btn btn-info">
+                            Изменить
+                        </a>
+
+                        <a href="{{route('delete.food', ['date_id' => $day->id, 'dish_id' => $dish->dish_id] )}}" class="btn btn-danger">
+                            Удалить
+                        </a>
+
                     </div>
 
                     <div class="modal fade" id="modalDish{{$dish->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -74,6 +82,12 @@
                     </div>
 
                 @endforeach
+                    <div class="d-flex justify-content-center">
+                        <a href="{{route('add.random.food', ['date_id' => $day->id] )}}"
+                           class="btn btn-success m-6" style="height: 40px;">
+                            Добавить
+                        </a>
+                    </div>
             </div>
 
 
