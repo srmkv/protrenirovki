@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dish;
 use App\Models\ParserHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,8 +40,8 @@ class AdminController extends Controller
     public function adminDashboard()
     {
         if (Auth::check()) {
-            $parse_history = ParserHistory::latest()->first();
-            return view('admin.dashboard.index', compact('parse_history'));
+
+            return view('admin.dashboard.index');
         }
 
         return redirect()->route('adminLogin')
@@ -49,6 +50,12 @@ class AdminController extends Controller
                     'email' => 'Please login to access the dashboard.',
                 ]
             )->onlyInput('email');
+    }
+
+    public function dishes(){
+        $parse_history = ParserHistory::latest()->first();
+        $dishes = Dish::latest()->paginate(10);
+        return view('admin.dishes.index', compact('dishes', 'parse_history'));
     }
 
 }

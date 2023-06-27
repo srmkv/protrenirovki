@@ -57,6 +57,7 @@ Route::middleware(['set_locale'])->group(
                         Route::get('/', 'login')->name('adminLogin');
                         Route::get('/admin/dashboard', 'adminDashboard')->name('adminDashboard');
                         Route::post('/admin/authenticate', 'adminAuthenticate')->name('adminAuthenticate');
+                        Route::get('/dishes', 'dishes')->name('dish.index');
                     }
                 );
                 Route::post("parse-dishes", ParseController::class)->name('parse.dishes');

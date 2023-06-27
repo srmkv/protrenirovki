@@ -70,6 +70,15 @@
             </a>
         </li>
 
+        <li>
+            <a href="{{route('dish.index')}}" class="side-menu {{ request()->routeIs('dish.index') ? 'side-menu--active':'' }}">
+                <div class="side-menu__icon"> <i data-lucide="coffee"></i> </div>
+                <div class="side-menu__title">
+                    {{__('messages.dishes')}}
+                </div>
+            </a>
+        </li>
+
 
 
     </ul>

@@ -109,6 +109,7 @@ return [
     'high_pressure'=> 'High pressure',
     'file'=> 'File',
     'export'=> 'Export',
+    'dishes'=> 'Dishes',
 
 
 
