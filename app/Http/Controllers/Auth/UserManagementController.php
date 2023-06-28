@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BzuCalcRequest;
 use App\Http\Requests\NutritionRequest;
+use App\Http\Requests\ProgramRequest;
 use App\Http\Requests\WaterRequest;
 use App\Models\Approach;
 use App\Models\BjuParametres;
@@ -15,6 +16,7 @@ use App\Models\Energy;
 use App\Models\FoodDish;
 use App\Models\PeriodDay;
 use App\Models\PeriodTraining;
+use App\Models\Program;
 use App\Models\Statistics;
 use App\Models\StatisticValues;
 use App\Models\Tarif;
@@ -253,7 +255,8 @@ class UserManagementController extends Controller
 
     public function workouts()
     {
-        return view('auth.workouts.index');
+        $rates = Tarif::OrderBy('sort', 'asc')->get();
+        return view('auth.workouts.index', compact('rates'));
     }
 
     public function nutrition(Request $request)
@@ -573,7 +576,24 @@ class UserManagementController extends Controller
 
         return view('auth.tools.water', compact('water'));
 
+    }
 
+    public function trainProgramCreate(ProgramRequest $request){
+        $data = $request->validated();
+        $data['user_id'] = Auth::user()->id;
+        $program = Program::updateOrCreate([
+            'user_id' => $data['user_id'],],[
+            'age' => $data['age'],
+            'gender' => $data['gender'],
+            'goal' => $data['goal'],
+            'number_of_workouts_per_week' => $data['number_of_workouts_per_week'],
+            'day' => json_encode($data['day']),
+            'train_type' => $data['train_type'],
+            'apparatus' => json_encode($data['apparatus']),
+            'apparatus_comment' => $data['apparatus_comment']
+            ]);
+
+        return view('auth.workouts.finish', compact('program'));
     }
 
 }
