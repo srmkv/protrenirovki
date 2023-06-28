@@ -13,6 +13,7 @@ use App\Models\DayFood;
 use App\Models\DayForFood;
 use App\Models\Dish;
 use App\Models\Energy;
+use App\Models\exercises;
 use App\Models\FoodDish;
 use App\Models\PeriodDay;
 use App\Models\PeriodTraining;
@@ -451,8 +452,9 @@ class UserManagementController extends Controller
 
     public function training()
     {
-        $days = TrainingDay::where('user_id', Auth::user()->id)->OrderBy('date', 'desc')->get();
-        return view('auth.training.index', compact('days'));
+        $days = TrainingDay::where('user_id', Auth::user()->id)->OrderBy('date', 'asc')->get();
+        $program = Program::where('user_id', Auth::user()->id)->first();
+        return view('auth.training.index', compact('days', 'program'));
     }
 
     public function DayTrainingStore(Request $request)
@@ -472,6 +474,14 @@ class UserManagementController extends Controller
     }
 
     public function trainingDay($id){
+        $exercises = exercises::all()->random(5);
+        foreach ($exercises as $exercise){
+            PeriodTraining::create([
+                'training_day_id' => $id,
+                'name' => $exercise->name
+            ]);
+        }
+
         $day = TrainingDay::findOrFail($id);
         $periods = PeriodTraining::where('training_day_id', $id)->get();
 
@@ -592,6 +602,20 @@ class UserManagementController extends Controller
             'apparatus' => json_encode($data['apparatus']),
             'apparatus_comment' => $data['apparatus_comment']
             ]);
+
+        $startDate = now();
+        $endDate = now()->addDays(10);
+        $currentDate = $startDate;
+
+        while ($currentDate <= $endDate){
+            $exercise = exercises::all()->random();
+            $res = TrainingDay::create([
+                'user_id' => $data['user_id'],
+                'date' => $currentDate->format('Y-m-d'),
+                'description' => $exercise->muscle_group
+                ]);
+            $currentDate = $currentDate->addDay();
+        }
 
         return view('auth.workouts.finish', compact('program'));
     }

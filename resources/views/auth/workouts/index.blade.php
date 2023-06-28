@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[monday]" type="checkbox" id="monday">
+                                           name="day[Mon]" type="checkbox" id="monday">
                                     <label class="form-check-label" for="monday">
                                         Понедельник
                                     </label>
@@ -117,7 +117,7 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[tuesday]" type="checkbox" id="tuesday">
+                                           name="day[Tue]" type="checkbox" id="tuesday">
                                     <label class="form-check-label" for="tuesday">
                                         Вторник
                                     </label>
@@ -125,7 +125,7 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[wednesday]" type="checkbox" id="wednesday">
+                                           name="day[Wed]" type="checkbox" id="wednesday">
                                     <label class="form-check-label" for="wednesday">
                                         Среда
                                     </label>
@@ -133,7 +133,7 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[thursday]" type="checkbox" id="thursday">
+                                           name="day[Thu]" type="checkbox" id="thursday">
                                     <label class="form-check-label" for="thursday">
                                         Четверг
                                     </label>
@@ -141,7 +141,7 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[friday]" type="checkbox" id="friday">
+                                           name="day[Fri]" type="checkbox" id="friday">
                                     <label class="form-check-label" for="friday">
                                         Пятница
                                     </label>
@@ -149,7 +149,7 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[saturday]" type="checkbox" id="saturday">
+                                           name="day[Sat]" type="checkbox" id="saturday">
                                     <label class="form-check-label" for="saturday">
                                         Суббота
                                     </label>
@@ -157,7 +157,7 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[sunday]" type="checkbox" id="sunday">
+                                           name="day[Sun]" type="checkbox" id="sunday">
                                     <label class="form-check-label" for="sunday">
                                         Воскресенье
                                     </label>

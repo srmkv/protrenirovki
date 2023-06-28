@@ -9,25 +9,111 @@
 @endsection
 @section('content')
 
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        body {
+            font-family: Verdana, sans-serif;
+        }
+
+
+        .weekdays {
+            margin: 0;
+            padding: 10px 0;
+            background-color: #FFFFFF;
+        }
+
+        .weekdays li {
+            display: inline-block;
+            width: 13.6%;
+            color: #000000;
+            text-align: center;
+        }
+
+        .days {
+            padding: 10px 0;
+            background: #FFFFFF;
+            margin: 0;
+        }
+
+        .days li {
+            list-style-type: none;
+            display: inline-block;
+            width: 13.6%;
+            height: 60px;
+            text-align: center;
+            font-size: 12px;
+            color: #000000;
+            border: 1px solid #CCD1D9;
+            border-collapse: collapse;
+        }
+
+        .days li .active {
+            padding: 5px;
+            background: #6D6443;
+            border-radius: 32px;
+            color: white !important
+        }
+
+        /* Add media queries for smaller screens */
+        @media screen and (max-width: 720px) {
+            .weekdays li, .days li {
+                width: 13.1%;
+            }
+        }
+
+        @media screen and (max-width: 420px) {
+            .weekdays li, .days li {
+                width: 12.5%;
+            }
+
+            .days li .active {
+                padding: 2px;
+            }
+        }
+
+        @media screen and (max-width: 290px) {
+            .weekdays li, .days li {
+                width: 12.2%;
+            }
+        }
+    </style>
 
 
     <div class="row">
         <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">
 
-            @foreach($days as $day)
+            @isset($program)
+                <table>
+                    <ul class="weekdays">
+                        <li>Пн</li>
+                        <li>Вт</li>
+                        <li>Ср</li>
+                        <li>Чт</li>
+                        <li>Пт</li>
+                        <li>Сб</li>
+                        <li>Вс</li>
+                    </ul>
 
-                <a href="{{route('training.day',$day->id)}}">
-                    <div class="card mb-4" id="tools">
-                        <div class="card-body">
-                            <h3 class="tools-title"> {{date("d.m.Y", strtotime($day->date))}} г.</h3>
-                            <p class="tools-description">{{$day->description}}</p>
-                        </div>
-                    </div>
-                </a>
-
-            @endforeach
-
-
+                    <ul class="days">
+                        @foreach($days as $day)
+                            <a href="{{route('training.day',$day->id)}}">
+                                <li>{{date("d", strtotime($day->date))}}
+                                    <div>
+                                        <span class="active">{{$day->description}}</span>
+                                    </div>
+                                </li>
+                            </a>
+                        @endforeach
+                    </ul>
+                </table>
+            @endisset
         </div>
     </div>
 
@@ -46,7 +132,8 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="FormWeight" class="form-label">Описание</label>
-                            <input type="text" name="description" class="form-control" id="FormWeight" placeholder="Сгибания ног">
+                            <input type="text" name="description" class="form-control" id="FormWeight"
+                                   placeholder="Сгибания ног">
                         </div>
                         <div class="mb-3">
                             <label for="ForDate" class="form-label">Дата</label>
