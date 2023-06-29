@@ -61,6 +61,13 @@
             color: white !important
         }
 
+        .days li .relax {
+            padding: 5px;
+            background: #B0CE66;
+            border-radius: 32px;
+            color: white !important
+        }
+
         /* Add media queries for smaller screens */
         @media screen and (max-width: 720px) {
             .weekdays li, .days li {
@@ -102,14 +109,34 @@
                     </ul>
 
                     <ul class="days">
+
+
+                        @for($i = $losDayCount; $i >= 1; $i--)
+
+                            <li>{{date("d", strtotime($firstDay)) - $i}}
+                                <div>
+                                    <span class="relax text-nowrap">x</span>
+                                </div>
+                            </li>
+
+                        @endfor
+
                         @foreach($days as $day)
-                            <a href="{{route('training.day',$day->id)}}">
+                            @if($day->description == 'отдых')
                                 <li>{{date("d", strtotime($day->date))}}
                                     <div>
-                                        <span class="active">{{$day->description}}</span>
+                                        <span class="relax text-nowrap">{{$day->description}}</span>
                                     </div>
                                 </li>
-                            </a>
+                            @else
+                                <a href="{{route('training.day',$day->id)}}">
+                                    <li>{{date("d", strtotime($day->date))}}
+                                        <div>
+                                            <span class="active text-nowrap">{{$day->description}}</span>
+                                        </div>
+                                    </li>
+                                </a>
+                            @endif
                         @endforeach
                     </ul>
                 </table>

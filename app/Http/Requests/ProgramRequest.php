@@ -29,7 +29,7 @@ class ProgramRequest extends FormRequest
             'day' => 'required',
             'train_type' => 'required',
             'apparatus' => 'required',
-            'apparatus_comment' => 'required'
+            'apparatus_comment' => 'nullable'
         ];
     }
 }

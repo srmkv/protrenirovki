@@ -23,13 +23,13 @@
       </li>
     @endif
 
-    @if(Auth::user()->traffic == 'Premium+')
-      <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('consultations') ? 'active':' ' }}" href="{{ route('consultations') }}">
-          <span class="nav-link-text ms-1">Мои консультации</span>
-        </a>
-      </li>
-    @endif
+{{--    @if(Auth::user()->traffic == 'Premium+')--}}
+{{--      <li class="nav-item">--}}
+{{--        <a class="nav-link {{ request()->routeIs('consultations') ? 'active':' ' }}" href="{{ route('consultations') }}">--}}
+{{--          <span class="nav-link-text ms-1">Мои консультации</span>--}}
+{{--        </a>--}}
+{{--      </li>--}}
+{{--    @endif--}}
 
       <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('rates') ? 'active':' ' }}" href="{{ route('rates') }}">

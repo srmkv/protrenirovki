@@ -21,13 +21,21 @@
     @csrf
     <!-- Modal modalWorkouts  -->
         <div class="modal fade" id="modalWorkouts" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true">
+             aria-hidden="true" style="padding-left: 20%;">
+
             <div class="modal-dialog modal-dialog-centered">
+
+                <img src="{{asset('dist/images/girlb.png')}}" height="490" style="
+    position: absolute;
+    z-index: -100;
+    margin-left: -320px;
+    margin-top: 20px;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalCenterTitle">Создание персональной программы</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+
 
                     <div class="modal-body">
 
@@ -80,13 +88,20 @@
 
                 </div>
             </div>
+
+
         </div>
         <!--modal-->
 
         <!-- Modal modalWorkouts2  -->
         <div class="modal" id="modalWorkouts2" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true">
+             aria-hidden="true" style="margin-left: 15%">
             <div class="modal-dialog modal-dialog-centered">
+                <img src="{{asset('dist/images/girlb.png')}}" height="700" style="
+    position: absolute;
+    z-index: -100;
+    margin-left: -420px;
+    margin-top: 26px;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalCenterTitle">Создание персональной программы</h5>
@@ -109,7 +124,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[Mon]" type="checkbox" id="monday">
+                                           name="day[Mon]" value="Mon" checked type="checkbox" id="monday">
                                     <label class="form-check-label" for="monday">
                                         Понедельник
                                     </label>
@@ -117,7 +132,7 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[Tue]" type="checkbox" id="tuesday">
+                                           name="day[Tue]" value="Tue" type="checkbox" id="tuesday">
                                     <label class="form-check-label" for="tuesday">
                                         Вторник
                                     </label>
@@ -125,7 +140,7 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[Wed]" type="checkbox" id="wednesday">
+                                           name="day[Wed]" value="Wed" type="checkbox" id="wednesday">
                                     <label class="form-check-label" for="wednesday">
                                         Среда
                                     </label>
@@ -133,7 +148,7 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[Thu]" type="checkbox" id="thursday">
+                                           name="day[Thu]" value="Thu" type="checkbox" id="thursday">
                                     <label class="form-check-label" for="thursday">
                                         Четверг
                                     </label>
@@ -141,7 +156,7 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[Fri]" type="checkbox" id="friday">
+                                           name="day[Fri]" value="Fri" type="checkbox" id="friday">
                                     <label class="form-check-label" for="friday">
                                         Пятница
                                     </label>
@@ -149,7 +164,7 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[Sat]" type="checkbox" id="saturday">
+                                           name="day[Sat]" value="Sat" type="checkbox" id="saturday">
                                     <label class="form-check-label" for="saturday">
                                         Суббота
                                     </label>
@@ -157,7 +172,7 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="day[Sun]" type="checkbox" id="sunday">
+                                           name="day[Sun]" value="Sun" type="checkbox" id="sunday">
                                     <label class="form-check-label" for="sunday">
                                         Воскресенье
                                     </label>
@@ -169,7 +184,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="train_type" value="in_hall" type="radio" id="trainOne">
+                                           name="train_type" value="in_hall" checked type="radio" id="trainOne">
                                     <label class="form-check-label" for="trainOne">
                                         В зале
                                     </label>
@@ -205,8 +220,14 @@
 
         <!-- Modal modalWorkouts3  -->
         <div class="modal" id="modalWorkouts3" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true">
+             aria-hidden="true" style="margin-left: 15%">
             <div class="modal-dialog modal-dialog-centered">
+
+                <img src="{{asset('dist/images/girlb.png')}}" height="740" style="
+    position: absolute;
+    z-index: -100;
+    margin-left: -420px;
+    margin-top: 34px;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalCenterTitle">Создание персональной программы</h5>
@@ -222,7 +243,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="apparatus[free_weights]" type="checkbox" id="free_weights">
+                                           name="apparatus[free_weights]" checked type="checkbox" id="free_weights">
                                     <label class="form-check-label" for="free_weights">
                                         Свободные веса
                                     </label>
@@ -401,8 +422,14 @@
 
         <!-- Modal modalWorkouts4  -->
         <div class="modal" id="modalWorkouts4" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true">
+             aria-hidden="true" style="margin-left: 15%;">
             <div class="modal-dialog modal-dialog-centered">
+                <img src="{{asset('dist/images/girlb.png')}}" height="660" style="
+    position: absolute;
+    z-index: -100;
+    margin-left: -420px;
+    margin-top: 28px;">
+
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalCenterTitle">Создание персональной программы</h5>
@@ -418,7 +445,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="apparatus[bench_with_slope]" type="checkbox" id="bench_with_slope">
+                                           name="apparatus[bench_with_slope]" type="checkbox" checked id="bench_with_slope">
                                     <label class="form-check-label" for="bench_with_slope">
                                         Скамья с уклоном
                                     </label>
@@ -489,11 +516,8 @@
                                     <p class="calculate-h">Другое</p>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-check-label" for="apparatus_comment">
-                                        Напишите список тренажеров
-                                    </label>
                                     <textarea class="form-control"
-                                              name="apparatus_comment" type="checkbox" id="apparatus_comment">
+                                              name="apparatus_comment" type="checkbox" id="apparatus_comment">Напишите список тренажеров
                                     </textarea>
 
                                 </div>
@@ -520,8 +544,13 @@
 
         <!-- Modal modalWorkouts5  -->
         <div class="modal" id="modalWorkouts5" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true">
+             aria-hidden="true" style="margin-left: 15%;">
             <div class="modal-dialog modal-dialog-centered">
+                <img src="{{asset('dist/images/girlb.png')}}" height="660" style="
+    position: absolute;
+    z-index: -100;
+    margin-left: -420px;
+    margin-top: 24px;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalCenterTitle">Создание персональной программы</h5>
@@ -529,7 +558,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <div class="row">
+                        <div class="row" style="height:670px; overflow: scroll;">
                             @foreach($rates as $rate)
                                 <div class="col-xs-12 col-sm-6 mb-2">
                                     <div class="tarif_card card text-center">
