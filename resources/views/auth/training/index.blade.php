@@ -113,9 +113,9 @@
 
                         @for($i = $losDayCount; $i >= 1; $i--)
 
-                            <li>{{date("d", strtotime($firstDay)) - $i}}
+                            <li>X
                                 <div>
-                                    <span class="relax text-nowrap">x</span>
+                                    <span class="relax text-nowrap">отдых</span>
                                 </div>
                             </li>
 
