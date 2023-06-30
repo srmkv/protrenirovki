@@ -33,7 +33,7 @@
             display: inline-block;
             width: 13.6%;
             color: #000000;
-            text-align: center;
+            padding: 10px;
         }
 
         .days {
@@ -46,8 +46,8 @@
             list-style-type: none;
             display: inline-block;
             width: 13.6%;
-            height: 60px;
-            text-align: center;
+            height: 120px;
+            padding: 10px;
             font-size: 12px;
             color: #000000;
             border: 1px solid #CCD1D9;
@@ -58,14 +58,16 @@
             padding: 5px;
             background: #6D6443;
             border-radius: 32px;
-            color: white !important
+            color: white !important;
+            text-align: center;
         }
 
         .days li .relax {
             padding: 5px;
             background: #B0CE66;
             border-radius: 32px;
-            color: white !important
+            color: white !important;
+            text-align: center;
         }
 
         /* Add media queries for smaller screens */
