@@ -79,7 +79,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Назад</button>
-                        <button type="button" class="btn btn-form" data-bs-toggle="modal"
+                        <button type="button" id="btn_modal_1" class="btn btn-form" data-bs-toggle="modal"
                                 data-bs-target="#modalWorkouts2">
                             Далее
                         </button>
@@ -206,7 +206,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                        <button type="button" class="btn btn-form" data-bs-toggle="modal"
+                        <button type="button" id="btn_modal_2" class="btn btn-form" data-bs-toggle="modal"
                                 data-bs-target="#modalWorkouts3">
                             Далее
                         </button>
@@ -408,7 +408,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Назад</button>
-                        <button type="button" class="btn btn-form" data-bs-toggle="modal"
+                        <button type="button" id="btn_modal_3" class="btn btn-form" data-bs-toggle="modal"
                                 data-bs-target="#modalWorkouts4">
                             Далее
                         </button>
@@ -445,7 +445,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="apparatus[bench_with_slope]" type="checkbox" checked id="bench_with_slope">
+                                           name="apparatus[bench_with_slope]" type="checkbox" checked
+                                           id="bench_with_slope">
                                     <label class="form-check-label" for="bench_with_slope">
                                         Скамья с уклоном
                                     </label>
@@ -530,7 +531,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Назад</button>
-                        <button type="button" class="btn btn-form" data-bs-toggle="modal"
+                        <button type="button" id="btn_modal_4" class="btn btn-form" data-bs-toggle="modal"
                                 data-bs-target="#modalWorkouts5">
                             Далее
                         </button>
@@ -558,7 +559,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <div class="row" style="height:670px; overflow: scroll;">
+                        <div class="row" style="height:510px; overflow: scroll;">
                             @foreach($rates as $rate)
                                 <div class="col-xs-12 col-sm-6 mb-2">
                                     <div class="tarif_card card text-center">
@@ -584,4 +585,19 @@
 
     </form>
 
+    <script>
+
+        // Hide last popups
+        function hidePopup(button_id, popup_id) {
+            document.getElementById(button_id).addEventListener("click", hideLastPopup);
+
+            function hideLastPopup() {
+                document.getElementById(popup_id).style.display = "none";
+            }
+        }
+        hidePopup("btn_modal_1", "modalWorkouts");
+        hidePopup("btn_modal_2", "modalWorkouts2");
+        hidePopup("btn_modal_3", "modalWorkouts3");
+        hidePopup("btn_modal_4", "modalWorkouts4");
+    </script>
 @endsection
