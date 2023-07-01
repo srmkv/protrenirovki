@@ -128,7 +128,7 @@
                         <div class="mb-3">
                             <label for="FormBZU" class="form-label">Количество тренировок в неделю (от 1 до 6)</label>
                             <input type="number" name="number_of_workouts_per_week" class="form-control" min="1" max="5"
-                                   id="#"
+                                   id="number_of_workouts_per_week_input_id"
                                    @isset($program)
                                    value="{{$program->number_of_workouts_per_week}}"
                                    @endisset
@@ -725,9 +725,79 @@
                 document.getElementById(popup_id).style.display = "none";
             }
         }
+
         hidePopup("btn_modal_1", "modalWorkouts");
         hidePopup("btn_modal_2", "modalWorkouts2");
         hidePopup("btn_modal_3", "modalWorkouts3");
         hidePopup("btn_modal_4", "modalWorkouts4");
+
+        // validate days of week for train
+        var daysCountObject = document.getElementById("number_of_workouts_per_week_input_id");
+
+        daysCountObject.addEventListener("keyup", daysCount);
+
+        var dayFromInput = parseInt(daysCountObject.value);
+
+        function daysCount(){
+            dayFromInput =  parseInt(daysCountObject.value);
+            dayTrigger();
+        }
+
+        var daySum =parseInt(daysCountObject.value);
+
+        function dayEventListener(day){
+
+            var checkbox = document.getElementById(day);
+
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    daySum +=1;
+                } else {
+                    daySum -=1;
+                }
+                dayTrigger();
+
+            })
+
+        }
+
+        function dayTrigger(){
+            if(dayFromInput === daySum){
+                disabledAllDays();
+            }else{
+                openAllDays();
+            }
+        }
+
+
+        function disabledAllDays(){
+            document.getElementById("monday").disabled = true;
+            document.getElementById("tuesday").disabled = true;
+            document.getElementById("wednesday").disabled = true;
+            document.getElementById("thursday").disabled = true;
+            document.getElementById("friday").disabled = true;
+            document.getElementById("saturday").disabled = true;
+            document.getElementById("sunday").disabled = true;
+        }
+
+        function openAllDays(){
+            document.getElementById("monday").disabled = false;
+            document.getElementById("tuesday").disabled = false;
+            document.getElementById("wednesday").disabled = false;
+            document.getElementById("thursday").disabled = false;
+            document.getElementById("friday").disabled = false;
+            document.getElementById("saturday").disabled = false;
+            document.getElementById("sunday").disabled = false;
+        }
+
+        dayTrigger();
+        dayEventListener("monday");
+        dayEventListener("tuesday");
+        dayEventListener("wednesday");
+        dayEventListener("thursday");
+        dayEventListener("friday");
+        dayEventListener("saturday");
+        dayEventListener("sunday");
+
     </script>
 @endsection
