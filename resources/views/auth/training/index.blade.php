@@ -115,7 +115,7 @@
 
                         @for($i = $losDayCount; $i >= 1; $i--)
 
-                            <li>X
+                            <li>{{date("d", strtotime($firstDay)) - $i}}
                                 <div>
                                     <span class="relax text-nowrap">отдых</span>
                                 </div>
@@ -125,11 +125,17 @@
 
                         @foreach($days as $day)
                             @if($day->description == 'отдых')
-                                <li>{{date("d", strtotime($day->date))}}
+                                <li>
+                                    <div>
+                                        <span class="{{date("d", strtotime($day->date)) == now()->format('d')  ? 'active' : ''}}">
+                                            {{date("d", strtotime($day->date))}}
+                                        </span>
+                                    </div>
                                     <div>
                                         <span class="relax text-nowrap">{{$day->description}}</span>
                                     </div>
                                 </li>
+
                             @else
                                 <a href="{{route('training.day',$day->id)}}">
                                     <li>{{date("d", strtotime($day->date))}}

@@ -142,9 +142,12 @@
                                 </div>
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->day)->Mon)
                                            {{\GuzzleHttp\json_decode($program->day)->Mon == "Mon" ? 'checked' : ''}}
                                            @endisset
+                                           @endisset
+
                                            name="day[Mon]" value="Mon" type="checkbox" id="monday">
                                     <label class="form-check-label" for="monday">
                                         Понедельник
