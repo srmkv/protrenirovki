@@ -17,6 +17,7 @@ class Program extends Model
         'number_of_workouts_per_week',
         'day',
         'train_type',
+        'experience',
         'apparatus',
         'apparatus_comment'
     ];

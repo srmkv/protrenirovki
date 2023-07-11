@@ -25,9 +25,9 @@ class ProgramRequest extends FormRequest
             'age' => 'required',
             'gender' => 'required',
             'goal' => 'required',
-            'number_of_workouts_per_week' => 'required',
             'day' => 'required',
             'train_type' => 'required',
+            'experience' => 'required',
             'apparatus' => 'required',
             'apparatus_comment' => 'nullable'
         ];

@@ -112,7 +112,7 @@
         <div class="modal" id="modalWorkouts2" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
              aria-hidden="true" style="margin-left: 15%">
             <div class="modal-dialog modal-dialog-centered">
-                <img src="{{asset('dist/images/girlb.png')}}" height="700" style="
+                <img src="{{asset('dist/images/girlb.png')}}" height="630" style="
     position: absolute;
     z-index: -100;
     margin-left: -420px;
@@ -126,8 +126,7 @@
                     <div class="modal-body">
 
                         <div class="mb-3">
-                            <label for="FormBZU" class="form-label">Количество тренировок в неделю (от 1 до 6)</label>
-                            <input type="number" name="number_of_workouts_per_week" class="form-control" min="1" max="5"
+                            <input type="hidden" name="number_of_workouts_per_week" class="form-control" min="1" max="5"
                                    id="number_of_workouts_per_week_input_id"
                                    @isset($program)
                                    value="{{$program->number_of_workouts_per_week}}"
@@ -156,8 +155,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->day)->Tue)
                                            {{\GuzzleHttp\json_decode($program->day)->Tue == "Tue" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="day[Tue]" value="Tue" type="checkbox" id="tuesday">
                                     <label class="form-check-label" for="tuesday">
@@ -167,8 +168,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->day)->Wed)
                                            {{\GuzzleHttp\json_decode($program->day)->Wed == "Wed" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="day[Wed]" value="Wed" type="checkbox" id="wednesday">
                                     <label class="form-check-label" for="wednesday">
@@ -178,8 +181,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->day)->Thu)
                                            {{\GuzzleHttp\json_decode($program->day)->Thu == "Thu" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="day[Thu]" value="Thu" type="checkbox" id="thursday">
                                     <label class="form-check-label" for="thursday">
@@ -189,8 +194,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->day)->Fri)
                                            {{\GuzzleHttp\json_decode($program->day)->Fri == "Fri" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="day[Fri]" value="Fri" type="checkbox" id="friday">
                                     <label class="form-check-label" for="friday">
@@ -200,8 +207,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->day)->Sat)
                                            {{\GuzzleHttp\json_decode($program->day)->Sat == "Sat" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="day[Sat]" value="Sat" type="checkbox" id="saturday">
                                     <label class="form-check-label" for="saturday">
@@ -211,8 +220,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->day)->Sun)
                                            {{\GuzzleHttp\json_decode($program->day)->Sun == "Sun" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="day[Sun]" value="Sun" type="checkbox" id="sunday">
                                     <label class="form-check-label" for="sunday">
@@ -234,7 +245,6 @@
                                         В зале
                                     </label>
                                 </div>
-
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
                                            @isset($program)
@@ -246,6 +256,37 @@
                                     </label>
                                 </div>
 
+                                <div class="mb-3">
+                                    <p class="calculate-h">Опыт тренировок</p>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-check-input calculate-check"
+                                           name="experience" value="beginner" type="radio" id="beginner">
+                                    <label class="form-check-label" for="beginner">
+                                        Новичок (до 6 месяцев)
+                                    </label>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-check-input calculate-check"
+                                           name="experience" value="experienced" type="radio" id="experienced">
+                                    <label class="form-check-label" for="experienced">
+                                        Опытный (от 6 до 18 месяцев)
+                                    </label>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-check-input calculate-check"
+                                           name="experience" value="pro" type="radio" id="pro">
+                                    <label class="form-check-label" for="pro">
+                                        Профи (от 18 до 36 месяцев)
+                                    </label>
+                                </div>
+                                <div class="mb-3 d-flex">
+                                    <input class="form-check-input calculate-check"
+                                           name="experience" value="super_pro" type="radio" id="super_pro">
+                                    <label class="form-check-label" for="super_pro">
+                                        Супер профи (свыше 36 месяцев)
+                                    </label>
+                                </div>
 
                             </div>
                         </div>
@@ -291,8 +332,10 @@
                                 </div>
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->free_weights)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->free_weights == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[free_weights]" type="checkbox" id="free_weights">
                                     <label class="form-check-label" for="free_weights">
@@ -302,8 +345,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->exercise_bike)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->exercise_bike == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[exercise_bike]" type="checkbox" id="exercise_bike">
                                     <label class="form-check-label" for="exercise_bike">
@@ -313,8 +358,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->treadmill)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->treadmill == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[treadmill]" type="checkbox" id="treadmill">
                                     <label class="form-check-label" for="treadmill">
@@ -324,8 +371,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->elliptical)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->elliptical == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[elliptical]" type="checkbox" id="elliptical">
                                     <label class="form-check-label" for="elliptical">
@@ -335,8 +384,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->stepper)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->stepper == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[stepper]" type="checkbox" id="stepper">
                                     <label class="form-check-label" for="stepper">
@@ -346,8 +397,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->pool)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->pool == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[pool]" type="checkbox" id="pool">
                                     <label class="form-check-label" for="pool">
@@ -357,8 +410,10 @@
 
                                 <div class="mb-3 d-flex">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->upper_and_lower_block_pull)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->upper_and_lower_block_pull == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[upper_and_lower_block_pull]" type="checkbox"
                                            id="upper_and_lower_block_pull">
@@ -369,8 +424,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->butterfly_apparatus)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->butterfly_apparatus == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[butterfly_apparatus]" type="checkbox"
                                            id="butterfly_apparatus">
@@ -381,8 +438,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->hammer_apparatus)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->hammer_apparatus == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[hammer_apparatus]" type="checkbox" id="hammer_apparatus">
                                     <label class="form-check-label" for="hammer_apparatus">
@@ -398,8 +457,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->smith_apparatus)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->smith_apparatus == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[smith_apparatus]" type="checkbox" id="smith_apparatus">
                                     <label class="form-check-label" for="smith_apparatus">
@@ -409,8 +470,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->crossover)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->crossover == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[crossover]" type="checkbox" id="crossover">
                                     <label class="form-check-label" for="crossover">
@@ -420,8 +483,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->gravitron)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->gravitron == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[gravitron]" type="checkbox" id="gravitron">
                                     <label class="form-check-label" for="gravitron">
@@ -431,8 +496,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->linkage)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->linkage == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[linkage]" type="checkbox" id="linkage">
                                     <label class="form-check-label" for="linkage">
@@ -442,8 +509,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->t_bar)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->t_bar == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[t_bar]" type="checkbox" id="t_bar">
                                     <label class="form-check-label" for="t_bar">
@@ -453,8 +522,10 @@
 
                                 <div class="mb-3 d-flex">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->apparatus_for_leg)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->apparatus_for_leg == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[apparatus_for_leg]" type="checkbox" id="apparatus_for_leg">
                                     <label class="form-check-label" for="apparatus_for_leg">
@@ -464,8 +535,10 @@
 
                                 <div class="mb-3 d-flex">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->apparatus_for_hand)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->apparatus_for_hand == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[apparatus_for_hand]" type="checkbox" id="apparatus_for_hand">
                                     <label class="form-check-label" for="apparatus_for_hand">
@@ -475,8 +548,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->apparatus_gakk)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->apparatus_gakk == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[apparatus_gakk]" type="checkbox" id="apparatus_gakk">
                                     <label class="form-check-label" for="apparatus_gakk">
@@ -486,8 +561,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->apparatus_platform)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->apparatus_platform == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[apparatus_platform]" type="checkbox" id="apparatus_platform">
                                     <label class="form-check-label" for="apparatus_platform">
@@ -497,10 +574,12 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->apparatus_for_calf)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->apparatus_for_calf == "on" ? 'checked' : ''}}
                                            @endisset
-                                           name="apparatus[apparatus_for_calf]" type="checkbox" id="apparatus_for_calf">
+                                           @endisset
+                                           name="apparatus[apparatus_fotrr_calf]" type="checkbox" id="apparatus_for_calf">
                                     <label class="form-check-label" for="apparatus_for_calf">
                                         Тренажеры для икр
                                     </label>
@@ -550,8 +629,10 @@
                                 </div>
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->bench_with_slope)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->bench_with_slope == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[bench_with_slope]" type="checkbox" checked
                                            id="bench_with_slope">
@@ -562,8 +643,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->bench_without_slope)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->bench_without_slope == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[bench_without_slope]" type="checkbox"
                                            id="bench_without_slope">
@@ -574,8 +657,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->free_weight_dumbbells)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->free_weight_dumbbells == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[free_weight_dumbbells]" type="checkbox"
                                            id="free_weight_dumbbells">
@@ -586,8 +671,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->free_weight_rods)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->free_weight_rods == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[free_weight_rods]" type="checkbox" id="free_weight_rods">
                                     <label class="form-check-label" for="free_weight_rods">
@@ -597,8 +684,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->free_weight_kettlebell)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->free_weight_kettlebell == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[free_weight_kettlebell]" type="checkbox"
                                            id="free_weight_kettlebell">
@@ -609,8 +698,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->horizontal_bar)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->horizontal_bar == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[horizontal_bar]" type="checkbox" id="horizontal_bar">
                                     <label class="form-check-label" for="horizontal_bar">
@@ -620,8 +711,10 @@
 
                                 <div class="mb-3 d-flex">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->bars)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->bars == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[bars]" type="checkbox" id="bars">
                                     <label class="form-check-label" for="bars">
@@ -631,8 +724,10 @@
 
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
+                                           @isset($program)
                                            @isset(\GuzzleHttp\json_decode($program->apparatus)->platform)
                                            {{\GuzzleHttp\json_decode($program->apparatus)->platform == "on" ? 'checked' : ''}}
+                                           @endisset
                                            @endisset
                                            name="apparatus[platform]" type="checkbox" id="platform">
                                     <label class="form-check-label" for="platform">
@@ -647,11 +742,10 @@
                                 </div>
                                 <div class="mb-3">
                                     <textarea class="form-control"
-                                              name="apparatus_comment" type="checkbox" id="apparatus_comment">
+                                              name="apparatus_comment" type="checkbox" id="apparatus_comment">Напишите список тренажеров
                                         @isset($program)
-                                            {{$program->apparatus_comment == $program->apparatus_comment ? $program->apparatus_comment : 'Напишите список тренажеров'}}
+                                            {{$program->apparatus_comment}}
                                         @endisset
-
                                     </textarea>
 
                                 </div>
@@ -735,16 +829,9 @@
         hidePopup("btn_modal_4", "modalWorkouts4");
 
         // validate days of week for train
-        var daysCountObject = document.getElementById("number_of_workouts_per_week_input_id");
 
         daysCountObject.addEventListener("keyup", daysCount);
 
-        var dayFromInput = parseInt(daysCountObject.value);
-
-        function daysCount(){
-            dayFromInput =  parseInt(daysCountObject.value);
-            dayTrigger();
-        }
 
         var daySum =parseInt(daysCountObject.value);
 
@@ -758,42 +845,12 @@
                 } else {
                     daySum -=1;
                 }
-                dayTrigger();
+                document.getElementById("number_of_workouts_per_week_input_id").value = daySum;
 
             })
 
         }
 
-        function dayTrigger(){
-            if(dayFromInput === daySum){
-                disabledAllDays();
-            }else{
-                openAllDays();
-            }
-        }
-
-
-        function disabledAllDays(){
-            document.getElementById("monday").disabled = true;
-            document.getElementById("tuesday").disabled = true;
-            document.getElementById("wednesday").disabled = true;
-            document.getElementById("thursday").disabled = true;
-            document.getElementById("friday").disabled = true;
-            document.getElementById("saturday").disabled = true;
-            document.getElementById("sunday").disabled = true;
-        }
-
-        function openAllDays(){
-            document.getElementById("monday").disabled = false;
-            document.getElementById("tuesday").disabled = false;
-            document.getElementById("wednesday").disabled = false;
-            document.getElementById("thursday").disabled = false;
-            document.getElementById("friday").disabled = false;
-            document.getElementById("saturday").disabled = false;
-            document.getElementById("sunday").disabled = false;
-        }
-
-        dayTrigger();
         dayEventListener("monday");
         dayEventListener("tuesday");
         dayEventListener("wednesday");

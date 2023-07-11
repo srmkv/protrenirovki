@@ -1,11 +1,11 @@
 @extends('auth.layouts.user_type.auth')
 @section('page')
     Дневник тренировок
-    <div class="d-flex align-items-center">
-        <button class="btn-head mb-0" data-bs-toggle="modal" data-bs-target="#modalDayTraining">
-            <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Добавить день
-        </button>
-    </div>
+{{--    <div class="d-flex align-items-center">--}}
+{{--        <button class="btn-head mb-0" data-bs-toggle="modal" data-bs-target="#modalDayTraining">--}}
+{{--            <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Добавить день--}}
+{{--        </button>--}}
+{{--    </div>--}}
 @endsection
 @section('content')
 
@@ -127,7 +127,8 @@
                             @if($day->description == 'отдых')
                                 <li>
                                     <div>
-                                        <span class="{{date("d", strtotime($day->date)) == now()->format('d')  ? 'active' : ''}}">
+                                        <span
+                                            class="{{date("d", strtotime($day->date)) == now()->format('d')  ? 'active' : ''}}">
                                             {{date("d", strtotime($day->date))}}
                                         </span>
                                     </div>
@@ -138,7 +139,13 @@
 
                             @else
                                 <a href="{{route('training.day',$day->id)}}">
-                                    <li>{{date("d", strtotime($day->date))}}
+                                    <li>
+                                        <div>
+                                        <span
+                                            class="{{date("d", strtotime($day->date)) == now()->format('d')  ? 'active' : ''}}">
+                                            {{date("d", strtotime($day->date))}}
+                                        </span>
+                                        </div>
                                         <div>
                                             <span class="active text-nowrap">{{$day->description}}</span>
                                         </div>

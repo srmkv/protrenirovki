@@ -573,14 +573,42 @@ class UserManagementController extends Controller
 
     public function trainingDay($id)
     {
-        $exercises = exercises::all()->random(5);
+        $program = Program::where('user_id', Auth::user()->id)->first();
+        $bjuParametres = BjuParametres::where('user_id', Auth::user()->id)->first();
+
+        switch ($program->goal) {
+            case "weight_loss":
+                $sets = 5;
+                $reps = 15;
+                $percent = 65;
+                break;
+            case "weight_maintenance":
+                $sets = 6;
+                $reps = 12;
+                $percent = 70;
+                break;
+            case "mass_gain":
+                $sets = 4;
+                $reps = 10;
+                $percent = 80;
+                break;
+        }
+
+        $exercises = exercises::all()->random(7);
         foreach ($exercises as $exercise) {
-            PeriodTraining::create(
+            $periodTraining = PeriodTraining::create(
                 [
                     'training_day_id' => $id,
                     'name' => $exercise->name
                 ]
             );
+            for($i = 0; $i <= $sets; $i++){
+                Approach::create([
+                                     'period_training_id' =>$periodTraining->id,
+                                     'repeat' => $reps,
+                                     'kg' => $bjuParametres->weight_now * $percent / 100
+                                 ]);
+            }
         }
 
         $day = TrainingDay::findOrFail($id);
@@ -725,9 +753,10 @@ class UserManagementController extends Controller
                 'age' => $data['age'],
                 'gender' => $data['gender'],
                 'goal' => $data['goal'],
-                'number_of_workouts_per_week' => $data['number_of_workouts_per_week'],
+                'number_of_workouts_per_week' =>count($data['day']),
                 'day' => json_encode($data['day']),
                 'train_type' => $data['train_type'],
+                'experience' => $data['experience'],
                 'apparatus' => json_encode($data['apparatus']),
                 'apparatus_comment' => $data['apparatus_comment']
             ]
@@ -739,17 +768,36 @@ class UserManagementController extends Controller
 
         $days = json_decode($program->day);
 
+        switch ($data['experience']) {
+            case "beginner":
+                $description = array("Фулбоди низ", "Фулбоди верх");
+                break;
+            case "experienced":
+                $description = array("Корпус+Спина", "Ноги", "Руки+Дельты+Грудные");
+                break;
+            case "pro":
+                $description = array("Руки+Дельты", "Ноги", "Грудь+дельты", "Корпус+Спина");
+                break;
+            case "super_pro":
+                $description = array("Дельты+Спина", "Руки+Дельты", "Ноги", "Корпус+Спина", "Грудь+Руки");
+                break;
+
+        }
+        $i = 0;
         while ($currentDate <= $endDate) {
-            $exercise = exercises::all()->random();
             foreach ($days as $day) {
                 if ($day == $currentDate->format('D')) {
                     TrainingDay::create(
                         [
                             'user_id' => $data['user_id'],
                             'date' => $currentDate->format('Y-m-d'),
-                            'description' => $exercise->muscle_group
+                            'description' => $description[$i]
                         ]
                     );
+                    if($description[$i] == end($description)){
+                        $i = -1;
+                    }
+                    $i = $i+1;
                     $currentDate = $currentDate->addDay();
                 }
             }
