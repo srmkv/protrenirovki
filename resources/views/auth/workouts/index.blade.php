@@ -8,10 +8,20 @@
             <div class="tarif_card card text-center">
                 <div class="offset-4 col-4 mt-12 mb-12">
                     <h3>Составьте индивидуальную программу тренировок</h3>
-                    <button class="btn btn-white text-success border border-success"
-                            data-bs-toggle="modal" data-bs-target="#modalWorkouts">
-                        Составить
-                    </button>
+                    @if($bju)
+                        <button class="btn btn-white text-success border border-success"
+                                data-bs-toggle="modal" data-bs-target="#modalWorkouts">
+                            Составить
+                        </button>
+                    @else
+                        <a href="{{route('tools')}}" class="btn btn-info">
+                            Чтобы использовать прогамму тренировок, вам нужно пройти через калкулятор калорий и БЖУ в разделе "Полезные
+                            инструменты"
+                        </a>
+
+                    @endif
+
+
                 </div>
             </div>
         </div>

@@ -297,7 +297,8 @@ class UserManagementController extends Controller
     {
         $rates = Tarif::OrderBy('sort', 'asc')->get();
         $program = Program::where('user_id', Auth::user()->id)->first();
-        return view('auth.workouts.index', compact('rates', 'program'));
+        $bju = BjuParametres::where('user_id', Auth::user()->id)->first();
+        return view('auth.workouts.index', compact('rates', 'program', 'bju'));
     }
 
     public function nutrition(Request $request)
