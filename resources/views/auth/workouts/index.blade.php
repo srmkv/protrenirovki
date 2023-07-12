@@ -768,10 +768,26 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Назад</button>
-                        <button type="button" id="btn_modal_4" class="btn btn-form" data-bs-toggle="modal"
-                                data-bs-target="#modalWorkouts5">
-                            Далее
-                        </button>
+
+                            <button type="button" id="btn_modal_4" class="btn btn-form" data-bs-toggle="modal"
+                                    data-bs-target="#modalWorkouts5">
+                                Далее
+                            </button>
+
+
+{{--                        @if(Auth::user()->traffic == 'Free')--}}
+{{--                            <button type="button" id="btn_modal_4" class="btn btn-form" data-bs-toggle="modal"--}}
+{{--                                    data-bs-target="#modalWorkouts5">--}}
+{{--                                Далее--}}
+{{--                            </button>--}}
+{{--                        @else--}}
+{{--                            <button type="submit"  class="btn btn-form">--}}
+{{--                                Далее--}}
+{{--                            </button>--}}
+{{--                        @endif--}}
+
+
+
                     </div>
 
 
@@ -840,27 +856,59 @@
 
         // validate days of week for train
 
+        // validate days of week for train
+        var daysCountObject = document.getElementById("number_of_workouts_per_week_input_id");
         daysCountObject.addEventListener("keyup", daysCount);
+        var dayFromInput = parseInt(daysCountObject.value);
+        function daysCount(){
+            dayFromInput =  parseInt(daysCountObject.value);
+            dayTrigger();
+        }
 
-
-        var daySum =parseInt(daysCountObject.value);
+        var daySum = 0;
+        if(parseInt(daysCountObject.value)){
+            var daySum = parseInt(daysCountObject.value);
+        } else{
+            var daySum = 0;
+        }
 
         function dayEventListener(day){
-
             var checkbox = document.getElementById(day);
-
             checkbox.addEventListener('change', function() {
                 if (this.checked) {
                     daySum +=1;
                 } else {
                     daySum -=1;
                 }
-                document.getElementById("number_of_workouts_per_week_input_id").value = daySum;
-
+                dayTrigger();
             })
-
         }
-
+        function dayTrigger(){
+            if(daySum === 5){
+                disabledAllDays();
+            }else{
+                openAllDays();
+            }
+        }
+        function disabledAllDays(){
+            document.getElementById("monday").disabled = true;
+            document.getElementById("tuesday").disabled = true;
+            document.getElementById("wednesday").disabled = true;
+            document.getElementById("thursday").disabled = true;
+            document.getElementById("friday").disabled = true;
+            document.getElementById("saturday").disabled = true;
+            document.getElementById("sunday").disabled = true;
+        }
+        function openAllDays(){
+            document.getElementById("monday").disabled = false;
+            document.getElementById("tuesday").disabled = false;
+            document.getElementById("wednesday").disabled = false;
+            document.getElementById("thursday").disabled = false;
+            document.getElementById("friday").disabled = false;
+            document.getElementById("saturday").disabled = false;
+            document.getElementById("sunday").disabled = false;
+        }
+        dayTrigger();
         dayEventListener("monday");
         dayEventListener("tuesday");
         dayEventListener("wednesday");
