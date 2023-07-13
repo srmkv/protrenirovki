@@ -891,13 +891,24 @@
             }
         }
         function disabledAllDays(){
-            document.getElementById("monday").disabled = true;
-            document.getElementById("tuesday").disabled = true;
-            document.getElementById("wednesday").disabled = true;
-            document.getElementById("thursday").disabled = true;
-            document.getElementById("friday").disabled = true;
-            document.getElementById("saturday").disabled = true;
-            document.getElementById("sunday").disabled = true;
+
+            function openCheckbox(day){
+                var checkbox = document.getElementById(day);
+                if(checkbox.checked){
+                    checkbox.disabled = false;
+                } else {
+                    checkbox.disabled = true;
+                }
+            }
+
+            openCheckbox("monday");
+            openCheckbox("tuesday");
+            openCheckbox("wednesday");
+            openCheckbox("thursday");
+            openCheckbox("friday");
+            openCheckbox("saturday");
+            openCheckbox("sunday");
+
         }
         function openAllDays(){
             document.getElementById("monday").disabled = false;

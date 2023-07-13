@@ -139,7 +139,7 @@
 
                             @else
                                 <a href="{{route('training.day',$day->id)}}">
-                                    <li>
+                                    <li style="background: #adcf6e54;">
                                         <div>
                                         <span
                                             class="{{date("d", strtotime($day->date)) == now()->format('d')  ? 'active' : ''}}">
