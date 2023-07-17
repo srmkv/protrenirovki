@@ -815,4 +815,40 @@ class UserManagementController extends Controller
         return view('auth.workouts.finish', compact('program'));
     }
 
+    public function approachDelete($id){
+        $approach = Approach::findOrFail($id);
+        $approach->delete();
+        return back();
+
+    }
+
+    public function approachEdit(Request $request, $id){
+        $approach = Approach::findOrFail($id);
+        request()->validate(
+            [
+                'kg' => 'required|between:1,10000',
+                'repeat' => 'required|between:1,10000',
+            ]
+        );
+
+        $approach->update(
+            [
+                'kg' => $request->kg,
+                'repeat' => $request->repeat,
+            ]
+        );
+
+        return back();
+
+    }
+
+
+    public function periodDelete($id){
+        $period = PeriodTraining::findOrFail($id);
+        $period->delete();
+        return back();
+    }
+
+
+
 }

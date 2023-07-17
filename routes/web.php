@@ -139,5 +139,9 @@ Route::middleware("auth")->controller(UserManagementController::class)->group(
         Route::get('/user/training/day/{id}', 'trainingDay')->name('training.day');
         Route::post('/user/training/day/{id}/store', 'periodTrainingStore')->name('periodTraining.store');
         Route::post('/user/training/day/{id}/approach/store', 'approachStore')->name('approach.store');
+        Route::get('/user/training/day/{id}/approach/delete', 'approachDelete')->name('approach.delete');
+        Route::get('/user/training/day/{id}/period/delete', 'periodDelete')->name('period.delete');
+        Route::post('/user/training/day/{id}/approach/edit', 'approachEdit')->name('approach.edit');
+
     }
 );
