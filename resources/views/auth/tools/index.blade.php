@@ -3,6 +3,12 @@
     Полезные инструменты
 @endsection
 @section('content')
+    <style>
+        .card-body:hover{
+            cursor: pointer;
+            background: yellow;
+        }
+    </style>
 <div class="row">
     <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">
       <div class="card mb-4" id="tools">
