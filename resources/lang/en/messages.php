@@ -110,6 +110,10 @@ return [
     'file'=> 'File',
     'export'=> 'Export',
     'dishes'=> 'Dishes',
+    'type'=> 'Type',
+    'type_train'=> 'Type train',
+    'experience'=> 'Experience',
+    'room'=> 'Room',
 
 
 

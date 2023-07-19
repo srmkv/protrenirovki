@@ -14,17 +14,11 @@ return new class extends Migration
         Schema::create('exercises', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('inventory')->nullable();
-            $table->string('base')->nullable();
-            $table->string('insulating')->nullable();
-            $table->string('masses')->nullable();
-            $table->string('relief')->nullable();
-            $table->string('muscle_group')->nullable();
-            $table->string('back_pain')->nullable();
-            $table->string('varicose')->nullable();
-            $table->string('diastasis')->nullable();
-            $table->string('knee_pain')->nullable();
-            $table->string('high_pressure')->nullable();
+            $table->string('type')->nullable();
+            $table->string('type_train')->nullable();
+            $table->string('apparatus')->nullable();
+            $table->string('experience')->nullable();
+            $table->string('room')->nullable();
             $table->timestamps();
         });
     }

@@ -516,7 +516,6 @@ class UserManagementController extends Controller
     {
         $days = TrainingDay::where('user_id', Auth::user()->id)->OrderBy('date', 'asc')->get();
         $program = Program::where('user_id', Auth::user()->id)->first();
-
         if($program){
         $firstDay = TrainingDay::where('user_id', Auth::user()->id)->first();
         $firstWeekDay = date("D", strtotime($firstDay->date));
@@ -574,6 +573,12 @@ class UserManagementController extends Controller
 
     public function trainingDay($id)
     {
+        $day = TrainingDay::findOrFail($id);
+        $periods = PeriodTraining::where('training_day_id', $id)->get();
+
+        if(!isset($periods)){
+            return view('auth.training.day', compact('day', 'periods'));
+        }
         $program = Program::where('user_id', Auth::user()->id)->first();
         $bjuParametres = BjuParametres::where('user_id', Auth::user()->id)->first();
 
@@ -612,7 +617,7 @@ class UserManagementController extends Controller
             }
         }
 
-        $day = TrainingDay::findOrFail($id);
+
         $periods = PeriodTraining::where('training_day_id', $id)->get();
 
         return view('auth.training.day', compact('day', 'periods'));

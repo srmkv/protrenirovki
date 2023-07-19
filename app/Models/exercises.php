@@ -11,16 +11,10 @@ class exercises extends Model
 
     protected $fillable = [
         'name',
-        'inventory',
-        'base',
-        'insulating',
-        'masses',
-        'relief',
-        'muscle_group',
-        'back_pain',
-        'varicose',
-        'diastasis',
-        'knee_pain',
-        'high_pressure',
+        'type',
+        'type_train',
+        'apparatus',
+        'experience',
+        'room',
     ];
 }

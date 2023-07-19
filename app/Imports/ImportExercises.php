@@ -18,17 +18,11 @@ class ImportExercises implements ToModel, WithHeadingRow
         return new exercises(
             [
                 'name' => $row['name'] ?? 'пусто',
-                'inventory' => $row['inventory'] ?? 'пусто',
-                'base' => $row['base'] ?? 'пусто',
-                'insulating' => $row['insulating'] ?? 'пусто',
-                'masses' => $row['masses'] ?? 'пусто',
-                'relief' => $row['relief'] ?? 'пусто',
-                'muscle_group' => $row['muscle_group'] ?? 'пусто',
-                'back_pain' => $row['back_pain'] ?? 'пусто',
-                'varicose' => $row['varicose'] ?? 'пусто',
-                'diastasis' => $row['diastasis'] ?? 'пусто',
-                'knee_pain' => $row['knee_pain'] ?? 'пусто',
-                'high_pressure' => $row['high_pressure'] ?? 'пусто',
+                'type' => $row['type'] ?? 'пусто',
+                'type_train' => $row['type_train'] ?? 'пусто',
+                'apparatus' => $row['apparatus'] ?? 'пусто',
+                'experience' => $row['experience'] ?? 'пусто',
+                'room' => $row['room'] ?? 'пусто',
             ]
         );
     }

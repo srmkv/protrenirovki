@@ -38,17 +38,11 @@
                     <thead>
                     <tr>
                         <th class="whitespace-nowrap">{{__('messages.name')}}</th>
+                        <th class="whitespace-nowrap">{{__('messages.type')}}</th>
+                        <th class="whitespace-nowrap">{{__('messages.type_train')}}</th>
                         <th class="whitespace-nowrap">{{__('messages.inventory')}}</th>
-                        <th class="whitespace-nowrap">{{__('messages.base')}}</th>
-                        <th class="whitespace-nowrap">{{__('messages.insulating')}}</th>
-                        <th class="whitespace-nowrap">{{__('messages.masses')}}</th>
-                        <th class="whitespace-nowrap">{{__('messages.relief')}}</th>
-                        <th class="whitespace-nowrap">{{__('messages.muscle_group')}}</th>
-                        <th class="whitespace-nowrap">{{__('messages.back_pain')}}</th>
-                        <th class="whitespace-nowrap">{{__('messages.varicose')}}</th>
-                        <th class="whitespace-nowrap">{{__('messages.diastasis')}}</th>
-                        <th class="whitespace-nowrap">{{__('messages.knee_pain')}}</th>
-                        <th class="whitespace-nowrap">{{__('messages.high_pressure')}}</th>
+                        <th class="whitespace-nowrap">{{__('messages.experience')}}</th>
+                        <th class="whitespace-nowrap">{{__('messages.room')}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -58,37 +52,19 @@
                                 {{ $exercise->name }}
                             </td>
                             <td>
-                                {{ $exercise->inventory }}
+                                {{ $exercise->type }}
                             </td>
                             <td>
-                                {{ $exercise->base }}
+                                {{ $exercise->type_train }}
                             </td>
                             <td>
-                                {{ $exercise->insulating }}
+                                {{ $exercise->apparatus }}
                             </td>
                             <td>
-                                {{ $exercise->masses }}
+                                {{ $exercise->experience }}
                             </td>
                             <td>
-                                {{ $exercise->relief }}
-                            </td>
-                             <td>
-                                {{ $exercise->muscle_group }}
-                            </td>
-                            <td>
-                                {{ $exercise->back_pain }}
-                            </td>
-                            <td>
-                                {{ $exercise->varicose }}
-                            </td>
-                            <td>
-                                {{ $exercise->diastasis }}
-                            </td>
-                            <td>
-                                {{ $exercise->knee_pain }}
-                            </td>
-                            <td>
-                                {{ $exercise->high_pressure }}
+                                {{ $exercise->room }}
                             </td>
                         </tr>
                     @endforeach
