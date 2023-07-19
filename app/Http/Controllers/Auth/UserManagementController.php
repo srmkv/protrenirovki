@@ -576,50 +576,6 @@ class UserManagementController extends Controller
         $day = TrainingDay::findOrFail($id);
         $periods = PeriodTraining::where('training_day_id', $id)->get();
 
-        if(!isset($periods)){
-            return view('auth.training.day', compact('day', 'periods'));
-        }
-        $program = Program::where('user_id', Auth::user()->id)->first();
-        $bjuParametres = BjuParametres::where('user_id', Auth::user()->id)->first();
-
-        switch ($program->goal) {
-            case "weight_loss":
-                $sets = 5;
-                $reps = 15;
-                $percent = 65;
-                break;
-            case "weight_maintenance":
-                $sets = 6;
-                $reps = 12;
-                $percent = 70;
-                break;
-            case "mass_gain":
-                $sets = 4;
-                $reps = 10;
-                $percent = 80;
-                break;
-        }
-
-        $exercises = exercises::all()->random(7);
-        foreach ($exercises as $exercise) {
-            $periodTraining = PeriodTraining::create(
-                [
-                    'training_day_id' => $id,
-                    'name' => $exercise->name
-                ]
-            );
-            for($i = 0; $i <= $sets; $i++){
-                Approach::create([
-                                     'period_training_id' =>$periodTraining->id,
-                                     'repeat' => $reps,
-                                     'kg' => $bjuParametres->weight_now * $percent / 100
-                                 ]);
-            }
-        }
-
-
-        $periods = PeriodTraining::where('training_day_id', $id)->get();
-
         return view('auth.training.day', compact('day', 'periods'));
     }
 
@@ -779,13 +735,13 @@ class UserManagementController extends Controller
                 $description = array("Фулбоди низ", "Фулбоди верх");
                 break;
             case "experienced":
-                $description = array("Корпус+Спина", "Ноги", "Руки+Дельты+Грудные");
+                $description = array("Корпус + Спина", "Ноги", "Руки + Дельты + Грудные");
                 break;
             case "pro":
-                $description = array("Руки+Дельты", "Ноги", "Грудь+дельты", "Корпус+Спина");
+                $description = array("Руки + Дельты", "Ноги", "Грудь + дельты", "Корпус + Спина");
                 break;
             case "super_pro":
-                $description = array("Дельты+Спина", "Руки+Дельты", "Ноги", "Корпус+Спина", "Грудь+Руки");
+                $description = array("Дельты + Спина", "Руки + Дельты", "Ноги", "Корпус + Спина", "Грудь + Руки");
                 break;
 
         }
@@ -793,7 +749,7 @@ class UserManagementController extends Controller
         while ($currentDate <= $endDate) {
             foreach ($days as $day) {
                 if ($day == $currentDate->format('D')) {
-                    TrainingDay::create(
+                    $trainingDay = TrainingDay::create(
                         [
                             'user_id' => $data['user_id'],
                             'date' => $currentDate->format('Y-m-d'),
@@ -805,6 +761,47 @@ class UserManagementController extends Controller
                     }
                     $i = $i+1;
                     $currentDate = $currentDate->addDay();
+//exercises
+                    $program = Program::where('user_id', Auth::user()->id)->first();
+                    $bjuParametres = BjuParametres::where('user_id', Auth::user()->id)->first();
+
+                    switch ($program->goal) {
+                        case "weight_loss":
+                            $sets = 5;
+                            $reps = 15;
+                            $percent = 65;
+                            break;
+                        case "weight_maintenance":
+                            $sets = 6;
+                            $reps = 12;
+                            $percent = 70;
+                            break;
+                        case "mass_gain":
+                            $sets = 4;
+                            $reps = 10;
+                            $percent = 80;
+                            break;
+                    }
+
+                    $exercises = exercises::where('type_train', $trainingDay->description)->limit(7)->get();
+                    foreach ($exercises as $exercise) {
+                        $periodTraining = PeriodTraining::create(
+                            [
+                                'training_day_id' => $trainingDay->id,
+                                'name' => $exercise->name
+                            ]
+                        );
+                        for($j = 0; $j <= $sets; $j++){
+                            Approach::create([
+                                                 'period_training_id' =>$periodTraining->id,
+                                                 'repeat' => $reps,
+                                                 'kg' => $bjuParametres->weight_now * $percent / 100
+                                             ]);
+                        }
+                    }
+
+                    //end exercises
+
                 }
             }
             TrainingDay::create(
