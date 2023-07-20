@@ -851,6 +851,16 @@ class UserManagementController extends Controller
         return back();
     }
 
+    public function operatingWeightCalc(Request $request){
+        request()->validate(
+            [
+                'weight' => 'required|between:1,10000',
+            ]
+        );
+
+        $weight = round($request->weight * 0.75);
+        return view('auth.tools.weight', compact('weight'));
+    }
 
 
 }

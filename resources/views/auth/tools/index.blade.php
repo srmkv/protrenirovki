@@ -20,7 +20,7 @@
       </div>
 
       <div class="card mb-4" id="tools">
-        <div class="card-body">
+        <div class="card-body" data-bs-toggle="modal" data-bs-target="#modalOperatingWeight">
             <h5 class="tools-title">Рабочий вес</h5>
             <p class="tools-description">Вычислить ваш рабочий вес в упражнениях</p>
         </div>
@@ -193,6 +193,39 @@
     </div>
 </div>
 <!--modal-->
+
+
+    <!-- Modal modalOperatingWeight  -->
+    <div class="modal fade" id="modalOperatingWeight" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Калькулятор расчета рабочего веса </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{route('operating.weight.calc')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="FormBZU" class="form-label">Одноповторный максимум (кг)</label>
+                            <input type="number" step="1" name="weight" class="form-control" id="#" placeholder="10кг">
+                        </div>
+                        <p>
+                            Одноповторный максимум - это вес в котором ты может сделать 1 чистый повтор.
+                        </p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="btn btn-form">Сохранить</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!--modal-->
+
 
 @endsection
 
