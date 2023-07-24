@@ -12,6 +12,18 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Auth\UserManagementController;
 use App\Http\Controllers\Admin\ExercisesController;
+use App\Mail\LaravelTenTestMail;
+use Illuminate\Support\Facades\Mail;
+
+Route::get('laravel_ten_test_mail', function () {
+    $data = "We are learning Laravel 10 mail from laravelia.com";
+
+    Mail::to('yazmyratatayew1805@gmail.com')->send(
+        new LaravelTenTestMail($data)
+    );
+
+    dd('Mail send successfully.');
+});
 
 Route::get(
     '/linkstorage',
