@@ -51,22 +51,22 @@
 
                         <div class="mb-3">
                             <label for="FormBZU" class="form-label">Возраст</label>
-                            <input type="number" name="age" @isset($program) value="{{$program->age}}" @endisset class="form-control" id="#" placeholder="Возраст">
+                            <input type="number" name="age" @isset($bju) value="{{$bju->age}}" @endisset class="form-control" id="#" placeholder="Возраст">
                         </div>
 
                         <div class="mb-3">
                             <label for="FormBZU" class="form-label">Пол</label>
                             <select class="form-select" name="gender" aria-label="Default select example">
                                 <option
-                                    @isset($program)
-                                    {{$program->gender == "men" ? 'selected' : ''}}
+                                    @isset($bju)
+                                    {{$bju->gender == "men" ? 'selected' : ''}}
                                     @endisset
                                     value="men">
                                     Мужчина
                                 </option>
                                 <option
-                                    @isset($program)
-                                    {{$program->gender == "women" ? 'selected' : ''}}
+                                    @isset($bju)
+                                    {{$bju->gender == "women" ? 'selected' : ''}}
                                     @endisset
                                     value="women">
                                     Женщина
@@ -157,7 +157,7 @@
                                            @endisset
                                            @endisset
 
-                                           name="day[Mon]" value="Mon" type="checkbox" id="monday">
+                                           name="day[Mon]" value="Mon" type="checkbox" checked id="monday">
                                     <label class="form-check-label" for="monday">
                                         Понедельник
                                     </label>
@@ -250,7 +250,7 @@
                                            @isset($program)
                                            {{$program->train_type == "in_hall" ? 'checked' : ''}}
                                            @endisset
-                                           name="train_type" value="in_hall" type="radio" id="trainOne">
+                                           name="train_type" value="in_hall" checked type="radio" id="trainOne">
                                     <label class="form-check-label" for="trainOne">
                                         В зале
                                     </label>
@@ -271,7 +271,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
-                                           name="experience" value="beginner" type="radio" id="beginner">
+                                           name="experience" value="beginner" checked type="radio" id="beginner">
                                     <label class="form-check-label" for="beginner">
                                         Новичок (до 6 месяцев)
                                     </label>
@@ -347,7 +347,7 @@
                                            {{\GuzzleHttp\json_decode($program->apparatus)->free_weights == "on" ? 'checked' : ''}}
                                            @endisset
                                            @endisset
-                                           name="apparatus[free_weights]" type="checkbox" id="free_weights">
+                                           name="apparatus[free_weights]" checked type="checkbox" id="free_weights">
                                     <label class="form-check-label" for="free_weights">
                                         Свободные веса
                                     </label>
@@ -618,7 +618,7 @@
         <div class="modal" id="modalWorkouts4" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
              aria-hidden="true" style="margin-left: 15%;">
             <div class="modal-dialog modal-dialog-centered">
-                <img src="{{asset('dist/images/girlb.png')}}" height="660" style="
+                <img src="{{asset('dist/images/girlb.png')}}" height="635" style="
     position: absolute;
     z-index: -100;
     margin-left: -420px;
@@ -635,7 +635,7 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <p class="calculate-h">Оборудования дома</p>
+{{--                                    <p class="calculate-h">Оборудования дома</p>--}}
                                 </div>
                                 <div class="mb-3">
                                     <input class="form-check-input calculate-check"
@@ -746,22 +746,22 @@
                                 </div>
 
                             </div>
-                            <div class="col-6">
-                                <div class="mb-3">
-                                    <p class="calculate-h">Другое</p>
-                                </div>
-                                <div class="mb-3">
-                                    <textarea class="form-control"
-                                              name="apparatus_comment" type="checkbox" id="apparatus_comment">Напишите список тренажеров
-                                        @isset($program)
-                                            {{$program->apparatus_comment}}
-                                        @endisset
-                                    </textarea>
+{{--                            <div class="col-6">--}}
+{{--                                <div class="mb-3">--}}
+{{--                                    <p class="calculate-h">Другое</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="mb-3">--}}
+{{--                                    <textarea class="form-control"--}}
+{{--                                              name="apparatus_comment" type="checkbox" id="apparatus_comment">Напишите список тренажеров--}}
+{{--                                        @isset($program)--}}
+{{--                                            {{$program->apparatus_comment}}--}}
+{{--                                        @endisset--}}
+{{--                                    </textarea>--}}
 
-                                </div>
+{{--                                </div>--}}
 
 
-                            </div>
+{{--                            </div>--}}
                         </div>
 
 
@@ -769,7 +769,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Назад</button>
 
-                            <button type="button" id="btn_modal_4" class="btn btn-form" data-bs-toggle="modal"
+                            <button type="submit" id="btn_modal_4" class="btn btn-form" data-bs-toggle="modal"
                                     data-bs-target="#modalWorkouts5">
                                 Далее
                             </button>
@@ -797,42 +797,42 @@
         <!--modal-->
 
         <!-- Modal modalWorkouts5  -->
-        <div class="modal" id="modalWorkouts5" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true" style="margin-left: 15%;">
-            <div class="modal-dialog modal-dialog-centered">
-                <img src="{{asset('dist/images/girlb.png')}}" height="660" style="
-    position: absolute;
-    z-index: -100;
-    margin-left: -420px;
-    margin-top: 24px;">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">Создание персональной программы</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+{{--        <div class="modal" id="modalWorkouts5" tabindex="-1" aria-labelledby="exampleModalCenterTitle"--}}
+{{--             aria-hidden="true" style="margin-left: 15%;">--}}
+{{--            <div class="modal-dialog modal-dialog-centered">--}}
+{{--                <img src="{{asset('dist/images/girlb.png')}}" height="660" style="--}}
+{{--    position: absolute;--}}
+{{--    z-index: -100;--}}
+{{--    margin-left: -420px;--}}
+{{--    margin-top: 24px;">--}}
+{{--                <div class="modal-content">--}}
+{{--                    <div class="modal-header">--}}
+{{--                        <h5 class="modal-title" id="exampleModalCenterTitle">Создание персональной программы</h5>--}}
+{{--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+{{--                    </div>--}}
 
-                    <div class="modal-body">
-                        <div class="row" style="height:510px; overflow: scroll;">
-                            @foreach($rates as $rate)
-                                <div class="col-xs-12 col-sm-6 mb-2">
-                                    <div class="tarif_card card text-center">
-                                        <p class="tarif-card-txt"><span class="tarif-head">{{$rate->name}}</span></p>
-                                        <p class="tarif-price-txt"><span class="tarif-price">{{$rate->price}} ₽</span> /
-                                            день</p>
-                                        <p class="tarif-card-content">{{$rate->hint}}</p>
-                                        <p class="tarif-card-content">Действует до:</p>
-                                        <p class="tarif-card-date">27 февраля, 2023</p>
-                                        <button type="submit"
-                                                class="tarif-card-btn">Купить
-                                        </button>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+{{--                    <div class="modal-body">--}}
+{{--                        <div class="row" style="height:510px; overflow: scroll;">--}}
+{{--                            @foreach($rates as $rate)--}}
+{{--                                <div class="col-xs-12 col-sm-6 mb-2">--}}
+{{--                                    <div class="tarif_card card text-center">--}}
+{{--                                        <p class="tarif-card-txt"><span class="tarif-head">{{$rate->name}}</span></p>--}}
+{{--                                        <p class="tarif-price-txt"><span class="tarif-price">{{$rate->price}} ₽</span> /--}}
+{{--                                            день</p>--}}
+{{--                                        <p class="tarif-card-content">{{$rate->hint}}</p>--}}
+{{--                                        <p class="tarif-card-content">Действует до:</p>--}}
+{{--                                        <p class="tarif-card-date">27 февраля, 2023</p>--}}
+{{--                                        <button type="submit"--}}
+{{--                                                class="tarif-card-btn">Купить--}}
+{{--                                        </button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
         <!--modal-->
 
 

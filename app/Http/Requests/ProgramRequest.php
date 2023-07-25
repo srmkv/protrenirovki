@@ -28,7 +28,7 @@ class ProgramRequest extends FormRequest
             'day' => 'required',
             'train_type' => 'required',
             'experience' => 'required',
-            'apparatus' => 'required',
+            'apparatus' => 'nullable',
             'apparatus_comment' => 'nullable'
         ];
     }

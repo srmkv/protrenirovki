@@ -720,7 +720,7 @@ class UserManagementController extends Controller
                 'train_type' => $data['train_type'],
                 'experience' => $data['experience'],
                 'apparatus' => json_encode($data['apparatus']),
-                'apparatus_comment' => $data['apparatus_comment']
+                'apparatus_comment' => 'apparatus_comment'
             ]
         );
 
