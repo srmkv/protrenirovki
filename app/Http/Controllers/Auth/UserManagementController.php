@@ -575,8 +575,10 @@ class UserManagementController extends Controller
     {
         $day = TrainingDay::findOrFail($id);
         $periods = PeriodTraining::where('training_day_id', $id)->get();
+        $exercises = exercises::all();
 
-        return view('auth.training.day', compact('day', 'periods'));
+
+        return view('auth.training.day', compact('day', 'periods', 'exercises'));
     }
 
     public function periodTrainingStore($id, Request $request)

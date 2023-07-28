@@ -115,8 +115,16 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="FormName" class="form-label">Упражнения</label>
-                            <input type="text" name="name" class="form-control" id="FormName" placeholder="Приседания с гантелями">
-                        </div>
+
+                            <select class="form-select" name="name" aria-label="Default select example">
+                                @foreach($exercises as $exercise)
+                                <option
+                                    value="{{$exercise->name}}">
+                                    {{$exercise->name}}
+                                </option>
+                                @endforeach
+                            </select>
+                           </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
