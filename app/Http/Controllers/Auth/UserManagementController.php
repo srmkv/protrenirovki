@@ -31,6 +31,7 @@ use App\Models\Weight;
 use Hamcrest\DiagnosingMatcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserManagementController extends Controller
@@ -575,8 +576,11 @@ class UserManagementController extends Controller
     {
         $day = TrainingDay::findOrFail($id);
         $periods = PeriodTraining::where('training_day_id', $id)->get();
-        $exercises = exercises::all();
 
+        $exercises = DB::table('exercises')
+            ->select('name', DB::raw('count(*) as total'))
+            ->groupBy('name')
+            ->get();
 
         return view('auth.training.day', compact('day', 'periods', 'exercises'));
     }
