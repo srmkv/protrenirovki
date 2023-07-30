@@ -12,11 +12,50 @@
             @foreach($periods as $period)
                 <div class="card mb-4" id="tools">
                     <div class="card-body">
-                        <h3 class="tools-title">{{$period->name}}
+                        <h3 class="tools-title" role="button" data-bs-toggle="modal"
+                            data-bs-target="#modalPeriod{{$period->id}}" >{{$period->name}}
                             <a href="{{route('period.delete', $period->id )}}" class="text-danger m-2">
                                 <span class="fas fa-trash-alt"></span>
                             </a>
                         </h3>
+
+                        <div class="modal fade" id="modalPeriod{{$period->id}}" tabindex="-1"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content p-3">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">{{ $period->name }}</h5>
+                                    </div>
+                                    <p class="mt-3 mb-3">
+                                        {{ $period->exercise($period->name)->experience }}
+                                    </p>
+                                    <img src="{{ asset($period->exercise($period->name)->photo) }}" width="100%">
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div>Тип тренировки</div>
+                                        <span class="fw-bold">{{ $period->exercise($period->name)->type }}</span>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div class="">
+                                        <h4>Помещение</h4>
+                                        <div class="ingredients">
+
+                                                <div class="d-flex justify-content-between p-2 border-bottom">
+                                                    <span>{{$period->exercise($period->name)->room}}</span>
+                                                </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <h4 class="mb-2 mt-3">Описание</h4>
+
+                                            <div class="border-bottom p-3">
+                                                {{ $period->exercise($period->name)->description }}
+                                            </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row">
 

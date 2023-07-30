@@ -101,6 +101,8 @@ Route::middleware(['set_locale'])->group(
                     function () {
                         Route::get('/exercises', 'index')->name('exercises.index');
                         Route::get('/exercises/create', 'create')->name('exercises.create');
+                        Route::get('/exercises/edit/{id}', 'edit')->name('exercise.edit');
+                        Route::put('/exercises/update/{id}', 'update')->name('exercise.update');
                         Route::post('/import', 'import')->name('exercises.import');
                         Route::get('/export', 'export')->name('exercises.export');
                     }

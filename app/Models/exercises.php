@@ -16,5 +16,7 @@ class exercises extends Model
         'apparatus',
         'experience',
         'room',
+        'photo',
+        'description',
     ];
 }

@@ -114,5 +114,6 @@ return [
     'type_train'=> 'Тип тренировки',
     'experience'=> 'Опыт',
     'room'=> 'Помещение',
+    'description'=> 'Описание',
 ];
 

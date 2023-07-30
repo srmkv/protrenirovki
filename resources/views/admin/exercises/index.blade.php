@@ -43,6 +43,7 @@
                         <th class="whitespace-nowrap">{{__('messages.inventory')}}</th>
                         <th class="whitespace-nowrap">{{__('messages.experience')}}</th>
                         <th class="whitespace-nowrap">{{__('messages.room')}}</th>
+                        <th class="text-center whitespace-nowrap">{{__('messages.actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -65,6 +66,11 @@
                             </td>
                             <td>
                                 {{ $exercise->room }}
+                            </td>
+                            <td>
+
+                                <a class="flex items-center text-warning mr-3" href="{{ route('exercise.edit', $exercise->id) }}">
+                                    <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> {{__('messages.edit')}} </a>
                             </td>
                         </tr>
                     @endforeach

@@ -17,4 +17,10 @@ class PeriodTraining extends Model
     public function approaches(){
         return $this->hasMany(Approach::class);
         }
+
+    public function exercise($query){
+        $exercise = exercises::where('name', $query)->first();
+        return $exercise;
+    }
+
 }

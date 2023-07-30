@@ -114,6 +114,7 @@ return [
     'type_train'=> 'Type train',
     'experience'=> 'Experience',
     'room'=> 'Room',
+    'description'=> 'Description',
 
 
 
