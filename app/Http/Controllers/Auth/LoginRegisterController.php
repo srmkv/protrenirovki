@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\LaravelTenTestMail;
+use Illuminate\Support\Facades\Mail;
 
 class LoginRegisterController extends Controller
 {
@@ -54,6 +56,12 @@ class LoginRegisterController extends Controller
                 'password' => Hash::make($request->password),
                 'traffic' => $request->traffic
             ]
+        );
+
+        $data = "Чемпион";
+
+        Mail::to($request->email)->send(
+            new LaravelTenTestMail($data)
         );
 
         $credentials = $request->only('email', 'password');

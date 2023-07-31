@@ -26,7 +26,7 @@ class LaravelTenTestMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Thank you for subscribing to our newsletter')
+        return $this->subject('Спасибо за подписку!')
             ->markdown('email.test');
     }
 
