@@ -29,7 +29,13 @@
                                     <p class="mt-3 mb-3">
                                         {{ $period->exercise($period->name)->experience }}
                                     </p>
-                                    <img src="{{ asset($period->exercise($period->name)->photo) }}" width="100%">
+                                    <img
+                                        @if($period->exercise($period->name)->photo)
+                                        src="{{ asset($period->exercise($period->name)->photo) }}"
+                                        @else
+                                        src="{{ asset('dist/images/illustration.svg') }}"
+                                        @endif
+                                        width="100%">
                                     <div class="d-flex justify-content-between mt-3">
                                         <div>Тип тренировки</div>
                                         <span class="fw-bold">{{ $period->exercise($period->name)->type }}</span>
@@ -57,19 +63,30 @@
                             </div>
                         </div>
 
+
+
                         <div class="row">
 
-                            @foreach($period->approaches as $approach)
+                            <div class="d-flex">
+
+                                <img
+                                    @if($period->exercise($period->name)->photo)
+                                    src="{{ asset($period->exercise($period->name)->photo) }}"
+                                    @else
+                                    src="{{ asset('dist/images/illustration.svg') }}"
+                                    @endif
+                                    height="150px">
+                                @foreach($period->approaches as $approach)
 
                                     <div class="col-1 mt-4">
                                         <h6 class="text-center">{{$approach->kg}} кг</h6>
                                         <h6 class="text-center">{{$approach->repeat}} пвт</h6>
                                         <div class="d-flex">
-{{--                                            <a href="#" class="text-warning m-2"--}}
-{{--                                                data-bs-toggle="modal"--}}
-{{--                                                data-bs-target="#modalApp{{$approach->id}}">--}}
-{{--                                                <span class="fa fa-pencil"></span>--}}
-{{--                                            </a>--}}
+                                            {{--                                            <a href="#" class="text-warning m-2"--}}
+                                            {{--                                                data-bs-toggle="modal"--}}
+                                            {{--                                                data-bs-target="#modalApp{{$approach->id}}">--}}
+                                            {{--                                                <span class="fa fa-pencil"></span>--}}
+                                            {{--                                            </a>--}}
                                             <a href="{{route('approach.delete', $approach->id )}}" class="text-danger m-2">
                                                 <span class="fas fa-trash-alt"></span>
                                             </a>
@@ -77,49 +94,53 @@
                                     </div>
 
 
-                                <!-- Modal #modalAppPer -->
-                                <div class="modal fade" id="#modalApp{{$approach->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalCenterTitle">Изминения подхода</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <!-- Modal #modalAppPer -->
+                                    <div class="modal fade" id="#modalApp{{$approach->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Изминения подхода</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <form action="{{route('approach.edit', $approach->id)}}" method="post" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label for="ForGram" class="form-label">kg</label>
+                                                            <input type="number" name="kg" class="form-control" id="ForGram" placeholder="0">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="ForGram" class="form-label">Павтор</label>
+                                                            <input type="number" name="repeat" class="form-control" id="ForGram" placeholder="0">
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                                        <button type="submit" class="btn btn-form">Сохранить</button>
+                                                    </div>
+                                                </form>
+
                                             </div>
-                                            <form action="{{route('approach.edit', $approach->id)}}" method="post" enctype="multipart/form-data">
-                                                @csrf
-                                                <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label for="ForGram" class="form-label">kg</label>
-                                                        <input type="number" name="kg" class="form-control" id="ForGram" placeholder="0">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="ForGram" class="form-label">Павтор</label>
-                                                        <input type="number" name="repeat" class="form-control" id="ForGram" placeholder="0">
-                                                    </div>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                                                    <button type="submit" class="btn btn-form">Сохранить</button>
-                                                </div>
-                                            </form>
-
                                         </div>
                                     </div>
+                                    <!--modal-->
+
+
+                                @endforeach
+
+                                <div class="col-1">
+                                    <div class="dropbox" role="button" onclick="show({{$period->id}})"
+                                         data-bs-toggle="modal"
+                                         data-bs-target="#modalApproach">
+                                        <data value="{{$period->id}}" id="{{$period->id}}"></data>
+                                    </div>
                                 </div>
-                                <!--modal-->
 
-
-                            @endforeach
-
-                            <div class="col-1">
-                                <div class="dropbox" role="button" onclick="show({{$period->id}})"
-                                     data-bs-toggle="modal"
-                                     data-bs-target="#modalApproach">
-                                    <data value="{{$period->id}}" id="{{$period->id}}"></data>
-                                </div>
                             </div>
+
+
 
                         </div>
 
